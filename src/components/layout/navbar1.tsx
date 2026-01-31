@@ -68,7 +68,7 @@ const Navbar1 = ({
     title: "Skill Bridge",
   },
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "/" },
     {
       title: "Products",
       url: "#",
@@ -102,7 +102,7 @@ const Navbar1 = ({
             <Link href={logo.url} className="flex items-center gap-2">
               <Image
                 src={logo.src}
-                className="w-20 dark:invert"
+                className="w-20"
                 width={100}
                 height={100}
                 alt={logo.alt}
@@ -136,7 +136,7 @@ const Navbar1 = ({
                 src={logo.src}
                 width={100}
                 height={100}
-                className="w-15 dark:invert"
+                className="w-15"
                 alt={logo.alt}
               />
             </Link>
