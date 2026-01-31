@@ -144,7 +144,7 @@ const Navbar1 = ({
 }: Navbar1Props) => {
   return (
     <section className={cn("py-4", className)}>
-      <div className="container">
+      <div className="container mx-auto px-3">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
