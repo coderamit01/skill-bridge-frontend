@@ -1,4 +1,7 @@
-import { createAuthClient } from "better-auth/react"
+import { createAuthClient } from "better-auth/react";
 export const authClient = createAuthClient({
-    baseURL: `${process.env.SERVER_URL}`
-})
+  baseURL: "http://localhost:8000",
+  fetchOptions: {
+    credentials: "include",
+  },
+});
