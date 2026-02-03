@@ -53,9 +53,10 @@ export function LoginForm({
           return;
         }
         toast.success("Successfully Login", { position: "top-right" });
-      } catch (error) {}
+      } catch (error) { }
     },
   });
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -75,8 +76,7 @@ export function LoginForm({
               <form.Field
                 name="email"
                 children={(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid;
+                  const isInvalid =field.state.meta.isTouched && !field.state.meta.isValid;
                   return (
                     <Field>
                       <FieldLabel htmlFor={field.name}>Email</FieldLabel>
