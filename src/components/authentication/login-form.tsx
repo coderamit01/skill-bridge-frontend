@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   password: z.string().min(8, "Minimum length is 8"),
@@ -40,13 +41,18 @@ export function LoginForm({
     },
     onSubmit: async ({ value }) => {
       try {
+        toast.loading("logging..", { position: "top-right" });
         const { data, error } = await authClient.signIn.email({
           email: value.email,
           password: value.password,
           rememberMe: true,
           callbackURL: "http://localhost:3000/dashboard",
         });
-        console.log(value);
+        if (error) {
+          toast.error(error.message, { position: "top-right" });
+          return;
+        }
+        toast.success("Successfully Login", { position: "top-right" });
       } catch (error) {}
     },
   });
