@@ -2,26 +2,21 @@ import { Route } from "@/type/route-types";
 import { title } from "process";
 
 
-export const adminRoutes:Route[] = [
+export const adminRoutes: Route[] = [
   {
-    items: [
-      {
-        title: 'Dashboard',
-        url: '/admin'
-      },
-      {
-        title: 'Users',
-        url: '/admin/users'
-      },
-      {
-        title: 'Bookings',
-        url: '/admin/bookings'
-      },
-      {
-        title: 'Categories',
-        url: '/admin/categories'
-      },
-      
-    ]
-  }
+    title: 'Dashboard',
+    url: '/admin'
+  },
+  {
+    title: 'Users',
+    url: '/admin/users'
+  },
+  {
+    title: 'Bookings',
+    url: '/admin/bookings'
+  },
+  {
+    title: 'Categories',
+    url: '/admin/categories'
+  },
 ]

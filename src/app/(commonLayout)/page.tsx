@@ -1,3 +1,9 @@
+import { userService } from "@/service/userService";
+
+
+
 export default function Home() {
-  return <div>hello</div>;
+console.log(userService);
+  return <div>hello
+  </div>;
 }

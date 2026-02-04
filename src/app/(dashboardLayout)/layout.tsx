@@ -1,27 +1,22 @@
+
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { ModeToggle } from "@/components/layout/ModeToggle";
 import { DropdownMenuAvatar } from "@/components/layout/ProfileAvatar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { userService } from "@/service/userService";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const {data} = await userService.getSession();
+  const userInfo = data!.user;
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar user={userInfo} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />

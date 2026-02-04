@@ -51,7 +51,7 @@ export function SignupForm({
           email: value.email,
           role: value.role || 'student',
           password: value.password,
-          callbackURL: "http://localhost:3000/login",
+          callbackURL: "/login",
         });
         console.log(data);
         if (error) {

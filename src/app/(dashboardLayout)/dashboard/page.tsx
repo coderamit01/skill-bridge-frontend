@@ -1,4 +1,11 @@
+"use client"
+import { useRouter } from "next/navigation";
 
-export default async function AdminDashboard() {
-  return <h1>Student Dashboard</h1>;
+
+export default function AdminDashboard() {
+  const router = useRouter();
+
+  return <h1>Student Dashboard
+    
+  </h1>;
 }
