@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
+import { User } from "better-auth";
 import {
   BadgeCheckIcon,
   BellIcon,
@@ -18,7 +19,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-export function DropdownMenuAvatar() {
+export function DropdownMenuAvatar({profile}:{profile: User}) {
   const logOut = async () => {
     await authClient.signOut({
       fetchOptions: {
@@ -34,7 +35,7 @@ export function DropdownMenuAvatar() {
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar>
             <Image
-              src="/images/avatar.jpg"
+              src={profile.image ? profile.image : "/images/avatar.jpg"}
               height={100}
               width={100}
               alt="shadcn"

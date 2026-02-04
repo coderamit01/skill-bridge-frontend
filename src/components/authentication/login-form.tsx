@@ -21,6 +21,7 @@ import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { userService } from "@/service/userService";
 
 const formSchema = z.object({
   password: z.string().min(8, "Minimum length is 8"),
@@ -53,6 +54,9 @@ export function LoginForm({
           return;
         }
         toast.success("Successfully Login", { position: "top-right" });
+        const session = 3
+        ;
+        console.log(session);
       } catch (error) { }
     },
   });

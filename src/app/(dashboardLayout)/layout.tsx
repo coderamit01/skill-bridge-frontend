@@ -7,13 +7,32 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Roles } from "@/constant/userRole";
 import { userService } from "@/service/userService";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const {data} = await userService.getSession();
+  const { data, error } = await userService.getSession(); 
+  if (error || !data) {
+    redirect('/login');
+  }
+
+  if(data.user.role === Roles.admin){
+     redirect('/admin');
+  }
+  if(data.user.role === Roles.tutor){
+     redirect('/tutor');
+  }
+  if(data.user.role === Roles.student){
+     redirect('/dashboard');
+  }
+  
+
+
   const userInfo = data!.user;
+
   return (
     <SidebarProvider>
       <AppSidebar user={userInfo} />
@@ -22,7 +41,7 @@ export default async function DashboardLayout({
           <SidebarTrigger className="-ml-1" />
           <div className="flex items-center gap-3">
             <ModeToggle />
-            <DropdownMenuAvatar />
+            <DropdownMenuAvatar profile={userInfo} />
           </div>
         </header>
         <div className="p-5">{children}</div>
