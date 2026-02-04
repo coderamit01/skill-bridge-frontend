@@ -49,11 +49,11 @@ export function SignupForm({
         const { data, error } = await authClient.signUp.email({
           name: value.name,
           email: value.email,
-          role: value.role,
+          role: value.role || 'student',
           password: value.password,
           callbackURL: "http://localhost:3000/login",
         });
-
+        console.log(data);
         if (error) {
           toast.error(error.message, { position: "top-right" });
           return;
@@ -98,7 +98,6 @@ export function SignupForm({
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                         placeholder="Your name"
-                        autoComplete="off"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -122,7 +121,6 @@ export function SignupForm({
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                         placeholder="Your email"
-                        autoComplete="off"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -175,7 +173,6 @@ export function SignupForm({
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                         placeholder="Your password"
-                        autoComplete="off"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
