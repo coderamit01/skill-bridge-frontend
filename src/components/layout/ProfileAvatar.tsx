@@ -18,13 +18,14 @@ import {
   LogOutIcon,
 } from "lucide-react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
-export function DropdownMenuAvatar({profile}:{profile: User}) {
+export function DropdownMenuAvatar({ profile }: { profile: User }) {
   const logOut = async () => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          callbackURL: "/login";
+          redirect("/login");
         },
       },
     });

@@ -21,7 +21,8 @@ import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
-import { userService } from "@/service/userService";
+import { Roles } from "@/constant/userRole";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   password: z.string().min(8, "Minimum length is 8"),
@@ -53,11 +54,21 @@ export function LoginForm({
           toast.error(error.message, { position: "top-right" });
           return;
         }
+        const { data: session, isPending } = authClient.useSession();
+        if (isPending) {
+          toast.loading("Redirect..", { position: "top-right" });
+        }
+        if (session?.user.role === "admin") {
+          redirect("/admin");
+        }
+        if (session?.user.role === "tutor") {
+          redirect("/tutor");
+        }
+        if (session?.user.role === "student") {
+          redirect("/dashboard");
+        }
         toast.success("Successfully Login", { position: "top-right" });
-        const session = 3
-        ;
-        console.log(session);
-      } catch (error) { }
+      } catch (error) {}
     },
   });
 
@@ -80,7 +91,8 @@ export function LoginForm({
               <form.Field
                 name="email"
                 children={(field) => {
-                  const isInvalid =field.state.meta.isTouched && !field.state.meta.isValid;
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid;
                   return (
                     <Field>
                       <FieldLabel htmlFor={field.name}>Email</FieldLabel>

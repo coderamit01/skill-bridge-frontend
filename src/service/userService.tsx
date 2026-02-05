@@ -1,6 +1,7 @@
+import { Env } from "@/env";
 import { cookies } from "next/headers";
 
-const AUTH_URL = process.env.SERVER_URL || 'http://localhost:5000';
+const AUTH_URL = Env.runtimeEnv.BACKEND_URL;
 
 interface User {
   id: string;
@@ -49,12 +50,12 @@ export const userService = {
       return { data: null, error: { message: "Something Went Wrong" } };
     }
   },
-  getUser: async function() {
-    const {data,error} = await this.getSession();
-    if(error || !data){
+  getUser: async function () {
+    const { data, error } = await this.getSession();
+    if (error || !data) {
       return false;
     }
 
-    return {data: data.user, error: error}
-  }
+    return { data: data.user, error: error };
+  },
 };

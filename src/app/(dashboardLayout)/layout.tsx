@@ -1,4 +1,3 @@
-
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { ModeToggle } from "@/components/layout/ModeToggle";
 import { DropdownMenuAvatar } from "@/components/layout/ProfileAvatar";
@@ -14,23 +13,10 @@ import { redirect } from "next/navigation";
 export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { data, error } = await userService.getSession(); 
+  const { data, error } = await userService.getSession();
   if (error || !data) {
-    redirect('/login');
+    redirect("/login");
   }
-
-  if(data.user.role === Roles.admin){
-     redirect('/admin');
-  }
-  if(data.user.role === Roles.tutor){
-     redirect('/tutor');
-  }
-  if(data.user.role === Roles.student){
-     redirect('/dashboard');
-  }
-  
-
-
   const userInfo = data!.user;
 
   return (
