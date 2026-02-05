@@ -54,19 +54,7 @@ export function LoginForm({
           toast.error(error.message, { position: "top-right" });
           return;
         }
-        const { data: session, isPending } = authClient.useSession();
-        if (isPending) {
-          toast.loading("Redirect..", { position: "top-right" });
-        }
-        if (session?.user.role === "admin") {
-          redirect("/admin");
-        }
-        if (session?.user.role === "tutor") {
-          redirect("/tutor");
-        }
-        if (session?.user.role === "student") {
-          redirect("/dashboard");
-        }
+
         toast.success("Successfully Login", { position: "top-right" });
       } catch (error) {}
     },

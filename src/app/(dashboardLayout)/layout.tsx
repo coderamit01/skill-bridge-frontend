@@ -18,7 +18,6 @@ export default async function DashboardLayout({
     redirect("/login");
   }
   const userInfo = data!.user;
-
   return (
     <SidebarProvider>
       <AppSidebar user={userInfo} />
