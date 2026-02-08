@@ -7,7 +7,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Roles } from "@/constant/userRole";
-import { userService } from "@/service/user.service";
+import { userService } from "@/service/session.service";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({

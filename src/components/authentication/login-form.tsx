@@ -48,7 +48,7 @@ export function LoginForm({
           email: value.email,
           password: value.password,
           rememberMe: true,
-          callbackURL: "http://localhost:3000/dashboard",
+          callbackURL: "http://localhost:3001/dashboard",
         });
         if (error) {
           toast.error(error.message, { position: "top-right" });

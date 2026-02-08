@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { userService } from "./service/user.service";
+import { userService } from "./service/session.service";
 import { Roles } from "./constant/userRole";
 
 export async function proxy(request: NextRequest) {
