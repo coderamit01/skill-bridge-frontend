@@ -18,6 +18,7 @@ import {
   LogOutIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export function DropdownMenuAvatar({ profile }: { profile: User }) {
@@ -50,7 +51,7 @@ export function DropdownMenuAvatar({ profile }: { profile: User }) {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <BadgeCheckIcon />
-            Profile
+           <Link href="/profile"> Profile</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

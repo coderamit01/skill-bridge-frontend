@@ -48,7 +48,7 @@ export function LoginForm({
           email: value.email,
           password: value.password,
           rememberMe: true,
-          callbackURL: "http://localhost:3001/dashboard",
+          callbackURL: "http://localhost:3000/dashboard",
         });
         if (error) {
           toast.error(error.message, { position: "top-right" });
@@ -56,7 +56,9 @@ export function LoginForm({
         }
 
         toast.success("Successfully Login", { position: "top-right" });
-      } catch (error) {}
+      } catch (error) {
+         toast.error("Failled to Login", { position: "top-right" });
+      }
     },
   });
 

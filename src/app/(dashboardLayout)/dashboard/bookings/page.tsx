@@ -10,7 +10,6 @@ import { UserBookTable } from "@/components/table/UserBookTable";
 
 export default async function AdminDashboard() {
   const { data } = await bookingService.getAllBookings();
-  console.log(data);
   return (
     <Table>
       <TableHeader>

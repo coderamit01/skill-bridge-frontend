@@ -1,12 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-images: {
+  images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'ibb.co.com',
-        pathname: '**',
+        protocol: "https",
+        hostname: "i.ibb.co.com",
       },
     ],
   },
