@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Card } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -8,17 +8,17 @@ import { useForm } from "@tanstack/react-form";
 export default function Availability() {
   const form = useForm({
     defaultValues: {
-      avilable_start_time: ,
-      avilable_end_time:,
+      avilable_start_time: "",
+      avilable_end_time: "",
     },
-    onSubmit: async ({ value }) => {
-
-    }
-  })
+    onSubmit: async ({ value }) => {},
+  });
   return (
     <div className="w-2xl mx-auto">
       <Card className="p-5">
-        <h4 className="text-center text-xl font-semibold">Update Availablity</h4>
+        <h4 className="text-center text-xl font-semibold">
+          Update Availablity
+        </h4>
         <div className="flex items-center space-x-2">
           <form
             id="availablity_form"
@@ -42,7 +42,7 @@ export default function Availability() {
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
                     </Field>
-                  )
+                  );
                 }}
               />
               <form.Field
@@ -59,11 +59,10 @@ export default function Availability() {
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
                     </Field>
-                  )
+                  );
                 }}
               />
             </FieldGroup>
-
           </form>
         </div>
       </Card>

@@ -4,8 +4,9 @@ import Image from "next/image";
 import { UserEditModal } from "./userEditModal";
 
 export default async function UserProfile() {
-  const {data}:any = await getUser();
+  const { data }: any = await getUser();
   const user = data.user;
+  console.log(user);
   return (
     <Card className="p-5">
       <div className="relative flex flex-col items-center space-y-1">
@@ -24,6 +25,5 @@ export default async function UserProfile() {
         {user.role && <h3>Role: {user.role}</h3>}
       </div>
     </Card>
-
   );
 }
