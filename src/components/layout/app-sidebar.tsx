@@ -1,13 +1,10 @@
 import * as React from "react";
 
-import { SearchForm } from "@/components/layout/search-form";
-import { VersionSwitcher } from "@/components/layout/version-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -48,8 +45,8 @@ export function AppSidebar({
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher />
+      <SidebarHeader className="h-16 flex items-center justify-center border-b p-1">
+          <span className="font-2xl font-semibold ">Skill Bridge</span>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

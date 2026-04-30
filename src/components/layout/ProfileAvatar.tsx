@@ -21,7 +21,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export function DropdownMenuAvatar({ profile }: { profile: User }) {
+export function DropdownMenuAvatar({ profile }: User) {
   const logOut = async () => {
     await authClient.signOut({
       fetchOptions: {
@@ -37,13 +37,13 @@ export function DropdownMenuAvatar({ profile }: { profile: User }) {
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar>
             <Image
-              src={profile.image ? profile.image : "/images/avatar.jpg"}
+              src={profile.image}
               height={100}
               width={100}
               alt="shadcn"
               className="rounded-full"
             />
-            <AvatarFallback>LR</AvatarFallback>
+            <AvatarFallback>{profile.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
