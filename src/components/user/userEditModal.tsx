@@ -1,5 +1,5 @@
-"use client"
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,29 +8,29 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { updateUser } from "@/service/user.service"
-import { useForm } from "@tanstack/react-form"
-import { toast } from "sonner"
+} from "@/components/ui/dialog";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { updateUser } from "@/service/user.service";
+import { useForm } from "@tanstack/react-form";
+import { toast } from "sonner";
 
 export function UserEditModal({ user }: { user: any }) {
   const form = useForm({
     defaultValues: {
       name: user.name || "",
       email: user.email || "",
-      image: user.image || ""
+      image: user.image || "",
     },
     onSubmit: async ({ value }) => {
       try {
-        const result = await updateUser(user.id, value);
+        await updateUser(user.id, value);
         toast.success("Successfully Updated", { position: "top-right" });
       } catch (error) {
         toast.error("Failed to Update", { position: "top-right" });
       }
-    }
-  })
+    },
+  });
   return (
     <Dialog>
       <form
@@ -62,7 +62,7 @@ export function UserEditModal({ user }: { user: any }) {
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
                   </Field>
-                )
+                );
               }}
             />
             <form.Field
@@ -79,7 +79,7 @@ export function UserEditModal({ user }: { user: any }) {
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
                   </Field>
-                )
+                );
               }}
             />
             <form.Field
@@ -96,19 +96,20 @@ export function UserEditModal({ user }: { user: any }) {
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
                   </Field>
-                )
+                );
               }}
             />
-
           </FieldGroup>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" form="update_form">Save changes</Button>
+            <Button type="submit" form="update_form">
+              Save changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </form>
     </Dialog>
-  )
+  );
 }
