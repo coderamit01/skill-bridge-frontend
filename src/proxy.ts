@@ -1,48 +1,47 @@
 import { NextRequest, NextResponse } from "next/server";
-import { userService } from "./service/session.service";
-import { Roles } from "./constant/userRole";
+import { getUser } from "@/services/auth.service";
+import { Role } from "@/types/user.types";
 
-export async function proxy(request: NextRequest) {
-  const path = request.nextUrl.pathname;
-  let isAuthenticated = false;
-  let isAdmin = false;
-  let isTutor = false;
-  let isStudent = false;
+export async function proxy(req: NextRequest) {
+  const pathName = req.nextUrl.pathname;
 
-  const { data } = await userService.getSession();
-  if (data) {
-    isAuthenticated = true;
-    isAdmin = data.user.role === Roles.admin;
-    isTutor = data.user.role === Roles.tutor;
-    isStudent = data.user.role === Roles.student;
+  const user = await getUser(req);
+  if (!user) {
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("redirect", pathName);
+    return NextResponse.redirect(loginUrl);
   }
-  if (!isAuthenticated) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+
+  const isAdmin = user.role === Role.ADMIN
+  const isTutor = user.role === Role.TUTOR
+  const isStudent = user.role === Role.STUDENT
 
   // Admin
   if (
-    (isAdmin && path.startsWith("/tutor")) ||
-    (isAdmin && path.startsWith("/dashboard"))
+    (isAdmin && pathName.startsWith("/tutor")) ||
+    (isAdmin && pathName.startsWith("/dashboard"))
   ) {
-    return NextResponse.redirect(new URL("/admin", request.url));
+    return NextResponse.redirect(new URL("/admin", req.url));
   }
   // Tutor
   if (
-    (isTutor && path.startsWith("/admin")) ||
-    (isTutor && path.startsWith("/dashboard"))
+    (isTutor && pathName.startsWith("/admin")) ||
+    (isTutor && pathName.startsWith("/dashboard"))
   ) {
-    return NextResponse.redirect(new URL("/tutor", request.url));
+    return NextResponse.redirect(new URL("/tutor", req.url));
   }
   // Student
   if (
-    (isStudent && path.startsWith("/admin")) ||
-    (isStudent && path.startsWith("/tutor"))
+    (isStudent && pathName.startsWith("/admin")) ||
+    (isStudent && pathName.startsWith("/tutor"))
   ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
+  const headers = new Headers(req.headers);
+  headers.set("x-user-id", user.id)
+  headers.set("x-user-role", user.role)
 
-  return NextResponse.next();
+  return NextResponse.next({ request: { headers } });
 }
 
 export const config = {

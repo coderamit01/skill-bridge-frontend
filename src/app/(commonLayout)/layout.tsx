@@ -1,14 +1,14 @@
-import { Footer2 } from "@/components/layout/footer2";
-import { Navbar1 } from "@/components/layout/navbar1";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 
 export default function commonLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Navbar1 />
-      <main> {children} </main>
-      <Footer2 />
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
     </>
   );
 }

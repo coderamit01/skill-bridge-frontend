@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { updateUser } from "@/service/user.service";
+import { updateUser } from "@/services/user.service";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 

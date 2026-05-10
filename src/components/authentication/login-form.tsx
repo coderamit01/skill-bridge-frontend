@@ -19,14 +19,14 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
-import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
-import { Roles } from "@/constant/userRole";
-import { redirect } from "next/navigation";
+import { ILoginPayload, Role } from "@/types/user.types";
+import { userLogin } from "@/services/auth.service";
+import router from "next/router";
 
 const formSchema = z.object({
-  password: z.string().min(8, "Minimum length is 8"),
   email: z.email(),
+  password: z.string().min(8, "Password length required 8 character")
 });
 
 export function LoginForm({
@@ -37,37 +37,38 @@ export function LoginForm({
     defaultValues: {
       email: "",
       password: "",
-    },
+    } satisfies ILoginPayload,
     validators: {
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
       try {
-        toast.loading("logging..", { position: "top-right" });
-        const { data, error } = await authClient.signIn.email({
-          email: value.email,
-          password: value.password,
-          rememberMe: true,
-          callbackURL: "http://localhost:3000/dashboard",
-        });
-        if (error) {
-          toast.error(error.message, { position: "top-right" });
-          return;
-        }
-
+        const data = await userLogin(value);
+        console.log(data);
         toast.success("Successfully Login", { position: "top-right" });
+        form.reset();
+        if(data.user.role === Role.ADMIN){
+          router.push("/admin");
+        }
+        if(data.user.role === Role.TUTOR){
+          router.push("/tutor");
+        }
+        if(data.user.role === Role.STUDENT){
+          router.push("/dashboard");
+        }
       } catch (error) {
-         toast.error("Failled to Login", { position: "top-right" });
+        toast.error("Failled to Login", { position: "top-right" });
       }
     },
   });
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      <h2 className="text-center font-bold text-3xl ">Skill<span className="text-[#2EA2A3]">Bridge</span></h2>
       <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>Login with your account</CardDescription>
+        <CardHeader className="text-start">
+          <CardTitle className="text-xl">Sign in to account</CardTitle>
+          <CardDescription>Enter your email & password to login</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -77,14 +78,14 @@ export function LoginForm({
               form.handleSubmit();
             }}
           >
-            <FieldGroup>
+            <FieldGroup className="gap-4">
               <form.Field
                 name="email"
                 children={(field) => {
                   const isInvalid =
                     field.state.meta.isTouched && !field.state.meta.isValid;
                   return (
-                    <Field>
+                    <Field className="gap-2">
                       <FieldLabel htmlFor={field.name}>Email</FieldLabel>
                       <Input
                         id={field.name}
@@ -95,6 +96,7 @@ export function LoginForm({
                         aria-invalid={isInvalid}
                         placeholder="example@gmail.com"
                         autoComplete="off"
+                        className="h-11"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -109,7 +111,7 @@ export function LoginForm({
                   const isInvalid =
                     field.state.meta.isTouched && !field.state.meta.isValid;
                   return (
-                    <Field>
+                    <Field className="gap-2">
                       <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                       <Input
                         id={field.name}
@@ -120,6 +122,7 @@ export function LoginForm({
                         aria-invalid={isInvalid}
                         placeholder="Type your password"
                         autoComplete="off"
+                        className="h-11"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -128,13 +131,18 @@ export function LoginForm({
                   );
                 }}
               />
-              <Field>
-                <Button type="submit" form="login_form">
-                  Login
-                </Button>
+              <Field className="gap-2 pt-3">
+                <form.Subscribe selector={(state) => state.isSubmitting}>
+                  {(isSubmitting) => (
+                    <Button type="submit" disabled={isSubmitting} size="default" className="py-5 cursor-pointer">
+                      {isSubmitting ? "Logging..." : "Login"}
+                    </Button>
+                  )}
+                </form.Subscribe>
+
                 <FieldDescription className="text-center">
                   Don&apos;t have an account?{" "}
-                  <Link href="/signup">Sign up</Link>
+                  <Link href="/signup" className="text-violet-600 hover:underline">Sign up</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

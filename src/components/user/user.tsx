@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { getUser } from "@/service/user.service";
+import { getUser } from "@/services/user.service";
 import Image from "next/image";
 import { UserEditModal } from "./userEditModal";
 

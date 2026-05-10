@@ -11,12 +11,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Route } from "@/type/route-types";
-import { Roles } from "@/constant/userRole";
+import { Route } from "@/types/route-types";
 import { adminRoutes } from "@/routes/adminRoutes";
 import { studentRoutes } from "@/routes/studentRoutes";
 import { tutorRoutes } from "@/routes/tutorRoutes";
 import Link from "next/link";
+import { Role } from "@/types/user.types";
 
 export function AppSidebar({
   user,
@@ -26,15 +26,15 @@ export function AppSidebar({
 }) {
   let routes: Route[] = [];
   switch (user.role) {
-    case Roles.admin:
+    case Role.ADMIN:
       routes = adminRoutes;
       break;
 
-    case Roles.student:
+    case Role.STUDENT:
       routes = studentRoutes;
       break;
 
-    case Roles.tutor:
+    case Role.TUTOR:
       routes = tutorRoutes;
       break;
 
@@ -46,7 +46,7 @@ export function AppSidebar({
   return (
     <Sidebar {...props}>
       <SidebarHeader className="h-16 flex items-center justify-center border-b p-1">
-          <span className="font-2xl font-semibold ">Skill Bridge</span>
+        <span className="font-2xl font-semibold ">Skill Bridge</span>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

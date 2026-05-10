@@ -1,4 +1,4 @@
-import { Route } from "@/type/route-types";
+import { Route } from "@/types/route-types";
 import { title } from "process";
 
 

@@ -1,40 +1,40 @@
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { BookingStatusModal } from "@/components/modal/BookingStatusModal";
+import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { MoreHorizontalIcon } from "lucide-react";
+import { BookingStatus, IBooking } from "@/types/booking.types";
 
-export function UserBookTable({ book }: { book: any }) {
-  const { tutor, price, session_date, start_time, end_time, status } = book;
-  const date = new Date(session_date);
+export function UserBookTable({ book }: { book: IBooking }) {
+  const { availability, id, status, totalPrice, tutor, scheduleAt } = book;
+  const scheduleDate = new Date(scheduleAt);
+
+  
   return (
     <TableRow>
-      <TableCell className="font-medium">{tutor?.user?.name}</TableCell>
-      <TableCell>{date.toLocaleDateString()}</TableCell>
-      <TableCell>{new Date(start_time).toLocaleTimeString()}</TableCell>
-      <TableCell>{new Date(end_time).toLocaleTimeString()}</TableCell>
-      <TableCell>৳{price}</TableCell>
-      <TableCell className="capitalize">{status}</TableCell>
-      {/* <TableCell className="text-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8">
-              <MoreHorizontalIcon />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </TableCell> */}
+      <TableCell className="font-medium">{tutor.name}</TableCell>
+      <TableCell>{scheduleDate.toLocaleDateString()}</TableCell>
+      <TableCell>{new Date(availability.startTime).toLocaleTimeString()}</TableCell>
+      <TableCell>{new Date(availability.endTime).toLocaleTimeString()}</TableCell>
+      <TableCell>৳{totalPrice}</TableCell>
+      <TableCell className="lowercase">
+        {status === BookingStatus.CONFIRMED &&
+          <Badge className="bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+            {status}
+          </Badge>
+        }
+        {status === BookingStatus.COMPLETED &&
+          <Badge className="bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300">
+            {status}
+          </Badge>
+        }
+        {status === BookingStatus.CANCELLED &&
+          <Badge className="bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">
+            {status}
+          </Badge>
+        }
+      </TableCell>
+      <TableCell>
+        <BookingStatusModal status={status} />
+      </TableCell>
     </TableRow>
   );
 }

@@ -1,4 +1,7 @@
-import { bookingService } from "@/service/bookings.service";
+"use client"
+
+import { getAllBookings } from "@/services/bookings.service";
+import { useQuery } from "@tanstack/react-query";
 import {
   Table,
   TableBody,
@@ -7,9 +10,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { UserBookTable } from "@/components/table/UserBookTable";
+import { IBooking } from "@/types/booking.types";
 
-export default async function AdminDashboard() {
-  const { data } = await bookingService.getAllBookings();
+export default function AdminDashboard() {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: getAllBookings,
+  })
+
+  if (isLoading) return <p className="p-6 text-gray-500">Loading bookings...</p>
+  if (isError) return <p className="p-6 text-red-500">Something went wrong. Please try again.</p>
+
+  const booking: IBooking[] = data?.data ?? [];
+
   return (
     <Table>
       <TableHeader>
@@ -20,11 +33,11 @@ export default async function AdminDashboard() {
           <TableHead>End</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Status</TableHead>
-          {/* <TableHead className="text-right">Actions</TableHead> */}
+          <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((book: any) => (
+        {booking.map((book) => (
           <UserBookTable key={book.id} book={book} />
         ))}
       </TableBody>
