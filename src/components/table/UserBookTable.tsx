@@ -7,7 +7,7 @@ export function UserBookTable({ book }: { book: IBooking }) {
   const { availability, id, status, totalPrice, tutor, scheduleAt } = book;
   const scheduleDate = new Date(scheduleAt);
 
-  
+
   return (
     <TableRow>
       <TableCell className="font-medium">{tutor.name}</TableCell>
@@ -33,7 +33,7 @@ export function UserBookTable({ book }: { book: IBooking }) {
         }
       </TableCell>
       <TableCell>
-        <BookingStatusModal status={status} />
+        <BookingStatusModal id={id} status={status} />
       </TableCell>
     </TableRow>
   );

@@ -1,6 +1,6 @@
 "use client"
 
-import { getAllBookings } from "@/services/bookings.service";
+import { getUserBookings } from "@/services/bookings.service";
 import { useQuery } from "@tanstack/react-query";
 import {
   Table,
@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/table";
 import { UserBookTable } from "@/components/table/UserBookTable";
 import { IBooking } from "@/types/booking.types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function AdminDashboard() {
+export default function UserBookingsPage() {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["bookings"],
-    queryFn: getAllBookings,
+    queryKey: ["userBookings"],
+    queryFn: getUserBookings,
   })
 
   if (isLoading) return <p className="p-6 text-gray-500">Loading bookings...</p>
@@ -24,23 +25,30 @@ export default function AdminDashboard() {
   const booking: IBooking[] = data?.data ?? [];
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Tutor Name</TableHead>
-          <TableHead>Session Date</TableHead>
-          <TableHead>Start</TableHead>
-          <TableHead>End</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Action</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {booking.map((book) => (
-          <UserBookTable key={book.id} book={book} />
-        ))}
-      </TableBody>
-    </Table>
+    <Card className="gap-4">
+      <CardHeader>
+        <CardTitle>My Bookings</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Tutor Name</TableHead>
+              <TableHead>Session Date</TableHead>
+              <TableHead>Start</TableHead>
+              <TableHead>End</TableHead>
+              <TableHead>Price</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {booking.map((book) => (
+              <UserBookTable key={book.id} book={book} />
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }
