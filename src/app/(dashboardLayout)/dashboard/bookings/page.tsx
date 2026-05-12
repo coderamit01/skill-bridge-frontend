@@ -1,6 +1,6 @@
 "use client"
 
-import { getUserBookings } from "@/services/bookings.service";
+import { getBookings } from "@/services/bookings.service";
 import { useQuery } from "@tanstack/react-query";
 import {
   Table,
@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export default function UserBookingsPage() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["userBookings"],
-    queryFn: getUserBookings,
+    queryFn: getBookings,
   })
 
   if (isLoading) return <p className="p-6 text-gray-500">Loading bookings...</p>

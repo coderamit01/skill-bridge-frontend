@@ -1,9 +1,9 @@
-import { getProfile } from '@/app/(dashboardLayout)/dashboard/profile/page';
+import { getMe } from '@/components/common/WelcomeCard';
 import EditProfileform from '@/components/student/EditProfileform'
 
 
 const ProfileEdit = async () => {
-  const user = await getProfile();
+  const user = await getMe();
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>

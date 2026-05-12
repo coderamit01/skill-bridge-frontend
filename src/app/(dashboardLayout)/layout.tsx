@@ -7,14 +7,12 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { IUser } from "@/types/user.types";
-import { headers } from "next/headers";
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
 
-  const {data: user} = await getMe();
+  const user = await getMe();
 
 
   return (

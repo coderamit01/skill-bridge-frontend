@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
 import { logOut } from "@/services/auth.service";
-import { IUser } from "@/types/user.types";
+import { IUser, Role } from "@/types/user.types";
 import {
   BadgeCheckIcon,
   LogOutIcon,
@@ -23,17 +23,27 @@ import { toast } from "sonner";
 export function DropdownMenuAvatar({ profile }: { profile: IUser }) {
   const router = useRouter();
 
+  const profileLink = () => {
+    if (profile.role === Role.STUDENT) {
+      return "/dashboard/profile";
+    }
+    if (profile.role === Role.TUTOR) {
+      return "/tutor/profile";
+    }
+    return "/admin/profile";
+
+  };
+
   const handleLogOut = async () => {
     try {
       await authClient.signOut();
       await logOut();
       router.push("/login");
-      toast.success("Logged out successfully!", {position: "top-right"});
+      toast.success("Logged out successfully!", { position: "top-right" });
     } catch (error) {
-      toast.error("Failed to log out. Please try again.", {position: "top-right"});
+      toast.error("Failed to log out. Please try again.", { position: "top-right" });
     }
   };
-  console.log(profile);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -48,7 +58,7 @@ export function DropdownMenuAvatar({ profile }: { profile: IUser }) {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <BadgeCheckIcon />
-            <Link href="/dashboard/profile"> Profile</Link>
+            <Link href={profileLink()}> Profile</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

@@ -1,4 +1,3 @@
-import { cookies } from "next/headers"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -6,21 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Edit, Mail, Calendar, Star, BookOpen } from "lucide-react"
 import ProfileInfoStatsCard from "@/components/student/ProfileInfoStatsCard"
 import { BioCard } from "@/components/student/BioCard"
+import { getMe } from "@/components/common/WelcomeCard"
 
-export async function getProfile() {
-  const cookieStore = await cookies()
-  const res = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/me`, {
-    headers: { cookie: cookieStore.toString() },
-    cache: "no-store",
-  })
-  if (!res.ok) return null
-  const data = await res.json()
-  return data.data
-}
 
 export default async function ProfilePage() {
-  const user = await getProfile()
-
+  const user = await getMe()
   const totalBookings = user?.bookingsAsStudent?.length ?? 0
   const totalReviews = user?.reviews?.length ?? 0
   const avgRating = totalReviews > 0

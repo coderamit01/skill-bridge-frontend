@@ -1,4 +1,6 @@
-import { Gender } from "@/types/user.types";
+import { IReview } from "@/types/review.type";
+import { ITutor } from "@/types/tutor.types";
+import { Gender, IStudent } from "@/types/user.types";
 
 export enum BookingStatus {
   CONFIRMED = 'CONFIRMED',
@@ -6,34 +8,10 @@ export enum BookingStatus {
   CANCELLED = 'CANCELLED'
 }
 
-export interface ITutor {
-  name: string;
-  email: string;
-  gender: Gender;
-  image: string | null;
-}
-
-export interface IStudent {
-  name: string;
-  email: string;
-  image: string | null;
-}
-
 export interface IAvailability {
   startTime: Date | string;
   endTime: Date | string;
 }
-
-export interface IReview {
-  bookingId: string;
-  studentId: string;
-  tutorId: string;
-  rating: number;
-  comment: string;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-}
-
 
 export interface IBooking {
   id: string;
@@ -48,5 +26,5 @@ export interface IBooking {
   tutor: ITutor;
   student: IStudent;
   availability: IAvailability;
-  review?: IReview;
+  review: IReview;
 }

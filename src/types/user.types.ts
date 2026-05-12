@@ -1,3 +1,7 @@
+import { IBooking } from "@/types/booking.types"
+import { IReview } from "@/types/review.type"
+import { ITutorDetails } from "@/types/tutor.types"
+
 export enum Role {
   STUDENT = "STUDENT",
   TUTOR = "TUTOR",
@@ -7,6 +11,13 @@ export enum Role {
 export enum Gender {
   MALE = "MALE",
   FEMALE = "FEMALE"
+}
+
+
+export interface IStudent {
+  name: string;
+  email: string;
+  image: string | null;
 }
 
 export interface IRegisterPayload {
@@ -21,12 +32,19 @@ export interface ILoginPayload {
 }
 
 export interface IUser {
-  id: string
-  name: string
-  email: string
-  role: Role,
-  bio: string,
-  image: string
+  id: string;
+  name: string;
+  email: string;
+  emailVerified: boolean;
+  image: string;
+  bio: string;
+  role: Role;
+  isBanned: boolean;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  tutor?: ITutorDetails;
+  bookingsAsStudent: IBooking[];
+  reviews: IReview[];
 }
 
 export interface IUpdatePayload {
