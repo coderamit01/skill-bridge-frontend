@@ -42,6 +42,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -84,6 +86,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --brand: #25a5a2;
+  --brand-dark: #1a7d7a;
 }
 
 .dark {
@@ -141,4 +145,15 @@ h4,
 h5,
 h6 {
   font-family: "Inter Variable";
+}
+
+.profile-box {
+  position: relative;
+  height: 226px;
+  background: linear-gradient(103.75deg, #33b1ee -13.9%, rgb(179 168 242) 79.68%);
+}
+.cartoon {
+    position: absolute;
+    right: 30px;
+    top: 20px;
 }

@@ -1,3 +1,4 @@
+import { getMe } from "@/components/common/WelcomeCard";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { ModeToggle } from "@/components/layout/ModeToggle";
 import { DropdownMenuAvatar } from "@/components/layout/ProfileAvatar";
@@ -6,30 +7,25 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { userService } from "@/services/session.service";
+import { IUser } from "@/types/user.types";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
 
-  const h = await headers();
+  const {data: user} = await getMe();
 
-  const userInfo = {
-    id: h.get("x-user-id") ?? "",
-    role: h.get("x-user-role") ?? ""
-  }
 
   return (
     <SidebarProvider>
-      <AppSidebar user={userInfo} />
+      <AppSidebar user={user} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
           <div className="flex items-center gap-3">
             <ModeToggle />
-            {/* <DropdownMenuAvatar profile={userInfo} /> */}
+            <DropdownMenuAvatar profile={user} />
           </div>
         </header>
         <div className="p-5">{children}</div>

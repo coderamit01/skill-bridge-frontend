@@ -10,40 +10,37 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
-import { User } from "better-auth";
+import { logOut } from "@/services/auth.service";
+import { IUser } from "@/types/user.types";
 import {
   BadgeCheckIcon,
-  BellIcon,
-  CreditCardIcon,
   LogOutIcon,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-export function DropdownMenuAvatar({ profile }: User) {
-  const logOut = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          redirect("/login");
-        },
-      },
-    });
+export function DropdownMenuAvatar({ profile }: { profile: IUser }) {
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    try {
+      await authClient.signOut();
+      await logOut();
+      router.push("/login");
+      toast.success("Logged out successfully!", {position: "top-right"});
+    } catch (error) {
+      toast.error("Failed to log out. Please try again.", {position: "top-right"});
+    }
   };
+  console.log(profile);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
-          <Avatar>
-            <Image
-              src={profile.image}
-              height={100}
-              width={100}
-              alt="shadcn"
-              className="rounded-full"
-            />
-            <AvatarFallback>{profile.name.charAt(0)}</AvatarFallback>
+          <Avatar className="h-10 w-10">
+            <AvatarImage src={profile.image} className="rounded-full" />
+            <AvatarFallback className="bg-[#25a5a21c] text-brand font-bold">{profile.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -51,11 +48,11 @@ export function DropdownMenuAvatar({ profile }: User) {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <BadgeCheckIcon />
-           <Link href="/profile"> Profile</Link>
+            <Link href="/dashboard/profile"> Profile</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logOut()}>
+        <DropdownMenuItem onClick={handleLogOut}>
           <LogOutIcon />
           Sign Out
         </DropdownMenuItem>

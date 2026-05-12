@@ -22,7 +22,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { ILoginPayload, Role } from "@/types/user.types";
 import { userLogin } from "@/services/auth.service";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.email(),
@@ -33,6 +33,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       email: "",
@@ -43,20 +44,18 @@ export function LoginForm({
     },
     onSubmit: async ({ value }) => {
       try {
-        const data = await userLogin(value);
-        console.log(data);
+        const { data } = await userLogin(value);
+        const role = data?.user?.role;
         toast.success("Successfully Login", { position: "top-right" });
+
         form.reset();
-        if(data.user.role === Role.ADMIN){
-          router.push("/admin");
-        }
-        if(data.user.role === Role.TUTOR){
-          router.push("/tutor");
-        }
-        if(data.user.role === Role.STUDENT){
-          router.push("/dashboard");
-        }
+
+        if (role === Role.ADMIN) router.push("/admin");
+        if (role === Role.TUTOR) router.push("/tutor")
+        if (role === Role.STUDENT) router.push("/dashboard");
+
       } catch (error) {
+        console.log(error);
         toast.error("Failled to Login", { position: "top-right" });
       }
     },

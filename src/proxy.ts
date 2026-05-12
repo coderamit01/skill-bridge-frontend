@@ -40,6 +40,7 @@ export async function proxy(req: NextRequest) {
   const headers = new Headers(req.headers);
   headers.set("x-user-id", user.id)
   headers.set("x-user-role", user.role)
+  headers.set("x-user-name", user.name)
 
   return NextResponse.next({ request: { headers } });
 }

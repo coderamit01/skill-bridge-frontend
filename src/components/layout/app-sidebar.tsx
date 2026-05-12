@@ -1,4 +1,7 @@
-import * as React from "react";
+"use client"
+
+import React from "react";
+import { usePathname } from "next/navigation";
 
 import {
   Sidebar,
@@ -11,12 +14,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Route } from "@/types/route-types";
 import { adminRoutes } from "@/routes/adminRoutes";
 import { studentRoutes } from "@/routes/studentRoutes";
 import { tutorRoutes } from "@/routes/tutorRoutes";
 import Link from "next/link";
 import { Role } from "@/types/user.types";
+import { Route } from "@/types/rotute.type";
 
 export function AppSidebar({
   user,
@@ -24,6 +27,8 @@ export function AppSidebar({
 }: {
   user: { role: string } & React.ComponentProps<typeof Sidebar>;
 }) {
+  const pathname = usePathname();
+
   let routes: Route[] = [];
   switch (user.role) {
     case Role.ADMIN:
@@ -43,6 +48,9 @@ export function AppSidebar({
       break;
   }
 
+  const isActive = (url: string) => {
+    return pathname === url;
+  };
   return (
     <Sidebar {...props}>
       <SidebarHeader className="h-16 flex items-center justify-center border-b p-1">
@@ -51,11 +59,16 @@ export function AppSidebar({
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-2">
               {routes.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>{item.title}</Link>
+                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                    <Link
+                      href={item.url}
+                      className={`${isActive(item.url) ? "bg-[#25a5a21c]! text-brand!  font-medium" : ""} h-10! ps-2!`}
+                    >
+                      {item.title}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

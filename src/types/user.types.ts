@@ -24,6 +24,14 @@ export interface IUser {
   id: string
   name: string
   email: string
-  role: Role
-  image: string | null
+  role: Role,
+  bio: string,
+  image: string
+}
+
+export interface IUpdatePayload {
+  name?: string,
+  email?: string,
+  bio?: string,
+  image?: string
 }

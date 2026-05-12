@@ -1,5 +1,6 @@
+import { Env } from "@/env";
 import api from "@/lib/axios"
-import { ILoginPayload, IRegisterPayload } from "@/types/user.types";
+import { ILoginPayload, IRegisterPayload, IUpdatePayload } from "@/types/user.types";
 import { NextRequest } from "next/server";
 
 
@@ -27,4 +28,14 @@ export const getUser = async (req: NextRequest) => {
   } catch (error) {
     return null;
   }
+}
+
+export const updateUser = async (id: string, payload: IUpdatePayload) => {
+  const res = await api.put(`/users/${id}`, payload);
+  return res.data;
+}
+
+export const logOut = async () => {
+  const res = await api.post("/auth/logout");
+  return res.data;
 }

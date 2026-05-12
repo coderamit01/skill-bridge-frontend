@@ -1,5 +1,4 @@
-import { Route } from "@/types/route-types";
-import { title } from "process";
+import { Route } from "@/types/rotute.type";
 
 
 export const adminRoutes: Route[] = [

@@ -1,5 +1,4 @@
 
-import { getCurrentUser } from "@/services/auth.service";
 import Link from "next/link";
 
 const subjects = [
@@ -77,9 +76,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-linear-to-b from-white via-gray-50 to-white">
-      {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-white via-violet-50 to-white py-16 md:py-28">
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-96 h-96 bg-gradient-to-r from-violet-100 to-transparent rounded-full -top-48 -right-48 opacity-40"></div>
           <div className="absolute w-96 h-96 bg-gradient-to-l from-violet-100 to-transparent rounded-full -bottom-48 -left-48 opacity-40"></div>
@@ -101,8 +98,6 @@ export default async function Home() {
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed">
               Connect with expert tutors in Math, Science, Coding and more. Book a session in minutes.
             </p>
-
-            {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <Link
                 href="/tutors"

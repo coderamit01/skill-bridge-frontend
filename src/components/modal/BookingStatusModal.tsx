@@ -51,7 +51,7 @@ export const BookingStatusModal = ({ id, status }: { id: string, status: Booking
         <DialogHeader>
           <DialogTitle>Update Booking Status</DialogTitle>
         </DialogHeader>
-        <div className="py-3">
+        <div className="py-3 w-full">
           <Select value={value} onValueChange={(v) => setValue(v as BookingStatus)}>
             <SelectTrigger className="w-full max-w-48">
               <SelectValue placeholder={status} />
@@ -72,7 +72,7 @@ export const BookingStatusModal = ({ id, status }: { id: string, status: Booking
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button onClick={handleUpdate} disabled={loading}>
+          <Button onClick={handleUpdate} disabled={loading} className="bg-brand hover:bg-brand-dark">
             {loading ? "Updating..." : "Update"}
           </Button>
         </DialogFooter>

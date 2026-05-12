@@ -1,4 +1,5 @@
-import { Route } from "@/types/route-types";
+import { Route } from "@/types/rotute.type";
+
 
 
 export const studentRoutes: Route[] = [
