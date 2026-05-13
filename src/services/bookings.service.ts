@@ -5,7 +5,7 @@ import { BookingStatus } from "@/types/booking.types";
 export const getBookings = async () => {
   try {
     const data = await serverFetch("/bookings",{
-      cache: "no-cache"
+      cache: "no-cache",
     })
     return data;
   } catch (error:any) {
@@ -17,7 +17,7 @@ export const updateBookingStatus = async ({ id, status }: { id: string, status: 
   try {
     const data = await clientFetch(`/bookings/${id}`,{
       method: "PUT",
-      body: JSON.stringify({status})
+      body: JSON.stringify({status}),
     })
     return data;
   } catch (error:any) {

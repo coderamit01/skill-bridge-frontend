@@ -7,10 +7,9 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSet,
 } from "@/components/ui/field"
-import { Gender, Role } from "@/types/user.types"
+import { Gender } from "@/types/user.types"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
@@ -42,7 +41,7 @@ export const TutorSignUpForm = () => {
     },
     onSubmit: async ({ value }) => {
       try {
-        const tutor = await createTtutor(value);
+        await createTtutor(value);
         toast.success("Tutor created successfully!", { position: "top-right" })
         form.reset();
       } catch (error: any) {

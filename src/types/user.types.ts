@@ -51,5 +51,10 @@ export interface IUpdatePayload {
   name?: string,
   email?: string,
   bio?: string,
-  image?: string
+  image?: string,
+  contactNumber?: string,
+  gender?: Gender,
+  hourlyRate?: number | string,
+  yearsExperience?: number | string,
+  isAvailable?: boolean
 }

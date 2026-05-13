@@ -1,4 +1,3 @@
-import { getMe } from "@/components/common/WelcomeCard"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -6,18 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Edit, Mail, Calendar, Star, User, Phone, DollarSign, Award, } from "lucide-react"
 import { BioCard } from "@/components/student/BioCard"
 import { IUser } from "@/types/user.types"
-import { IBooking } from "@/types/booking.types"
+import { getMe } from "@/lib/getMe"
 
+const TutorProfile = async () => {
 
-export default async function TutorProfile() {
-  const user: IUser = await getMe()
-  const totalBookings = user?.bookingsAsStudent?.length ?? 0
-  const totalReviews = user?.reviews?.length ?? 0
-  const avgRating = totalReviews > 0
-    ? (user.reviews.reduce((sum: number, r: any) => sum + Number(r.rating), 0) / totalReviews).toFixed(1)
-    : "N/A";
-
-
+  const { data: user }: { data: IUser } = await getMe()
   const { name, email, image, role, emailVerified, createdAt, bio, tutor, reviews } = user || {};
 
   return (
@@ -27,7 +19,7 @@ export default async function TutorProfile() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
         </div>
-        <Link href="/dashboard/profile/edit">
+        <Link href="/tutor/profile/edit">
           <Button className="rounded-full bg-brand hover:bg-brand-dark gap-2 cursor-pointer">
             <Edit className="w-4 h-4" />
             Edit Profile
@@ -132,3 +124,5 @@ export default async function TutorProfile() {
     </div>
   )
 }
+
+export default TutorProfile;

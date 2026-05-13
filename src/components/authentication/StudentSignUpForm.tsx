@@ -38,7 +38,7 @@ export const StudentSignUpForm = () => {
     },
     onSubmit: async ({ value }) => {
       try {
-        const user = await userRegister(value);
+        await userRegister(value);
         toast.success("Account created successfully!", { position: "top-right" })
         form.reset();
       } catch (error: any) {

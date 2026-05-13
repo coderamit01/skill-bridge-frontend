@@ -44,7 +44,7 @@ export function LoginForm({
     },
     onSubmit: async ({ value }) => {
       try {
-        const { data } = await userLogin(value);
+        const data = await userLogin(value);
         const role = data?.user?.role;
         toast.success("Successfully Login", { position: "top-right" });
 

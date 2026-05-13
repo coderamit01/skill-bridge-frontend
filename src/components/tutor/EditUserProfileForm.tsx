@@ -1,59 +1,54 @@
 "use client"
 
-import { updateUser } from "@/actions/studentProfileAction";
+import { updateUserProfile } from "@/actions/userProfileAction";
+import { IUser } from "@/types/user.types";
+import { useForm } from "@tanstack/react-form";
+import { useTransition } from "react";
+import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { IUpdatePayload, IUser } from "@/types/user.types";
-import { useForm } from "@tanstack/react-form";
-import { useTransition } from "react";
-import { toast } from "sonner";
+import { FieldLabel } from "@/components/ui/field";
 
-export interface IEditProfileForm {
+export interface IEditUserProfileForm {
   user: IUser
 }
 
-const EditProfileform = ({ user }: IEditProfileForm) => {
-
+export const EditUserProfileForm = ({ user }: IEditUserProfileForm) => {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm({
     defaultValues: {
       name: user.name || "",
-      email: user.email,
       bio: user.bio || "",
       image: user.image || ""
     },
     onSubmit: async ({ value }) => {
       startTransition(async () => {
-        const result = await updateUser(user.id, value);
-        
+        const result = await updateUserProfile(value);
         if (result.success) {
-          toast.success("Profile updated!");
+          toast.success("Profile updated!",{position: "top-right"});
         } else {
-          toast.error(result.error ?? "Something went wrong");
+          toast.error(result.error ?? "Something went wrong", {position: "top-right"});
         }
       })
     }
   })
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-6">
       <form
         onSubmit={(e) => { e.preventDefault(); form.handleSubmit() }}
         className="space-y-5"
       >
-
         <form.Field name="image">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
-
               <div className="space-y-3">
-                <label className="text-sm font-medium text-gray-700 block">
+                <FieldLabel className="text-sm font-medium text-gray-700 block">
                   Avatar URL
-                </label>
+                </FieldLabel>
                 <div className="flex items-center gap-4">
                   <Avatar className="w-14 h-14">
                     <AvatarImage src={field.state.value} />
@@ -78,13 +73,11 @@ const EditProfileform = ({ user }: IEditProfileForm) => {
 
         <form.Field name="name">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1.5">
+                <FieldLabel className="text-sm font-medium text-gray-700 block mb-1.5">
                   Full Name
-                </label>
+                </FieldLabel>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -99,9 +92,9 @@ const EditProfileform = ({ user }: IEditProfileForm) => {
         </form.Field>
 
         <div>
-          <label className="text-sm font-medium text-gray-700 block mb-1.5">
+          <FieldLabel className="text-sm font-medium text-gray-700 block mb-1.5">
             Email <span className="text-gray-400 font-normal">(cannot be changed)</span>
-          </label>
+          </FieldLabel>
           <Input
             value={user.email}
             disabled
@@ -111,13 +104,11 @@ const EditProfileform = ({ user }: IEditProfileForm) => {
 
         <form.Field name="bio">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1.5">
+                <FieldLabel className="text-sm font-medium text-gray-700 block mb-1.5">
                   Bio
-                </label>
+                </FieldLabel>
                 <Textarea
                   id={field.name}
                   name={field.name}
@@ -127,7 +118,6 @@ const EditProfileform = ({ user }: IEditProfileForm) => {
                   placeholder="Tell us about yourself..."
                   rows={3}
                 />
-
               </div>
             )
           }}
@@ -153,10 +143,7 @@ const EditProfileform = ({ user }: IEditProfileForm) => {
             )}
           </form.Subscribe>
         </div>
-
       </form>
     </div>
   )
 }
-
-export default EditProfileform
