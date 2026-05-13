@@ -1,4 +1,3 @@
-import { getMe } from "@/components/common/WelcomeCard";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { ModeToggle } from "@/components/layout/ModeToggle";
 import { DropdownMenuAvatar } from "@/components/layout/ProfileAvatar";
@@ -7,13 +6,12 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { getMe } from "@/lib/getMe";
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-
-  const user = await getMe();
-
+  const { data: user } = await getMe();
 
   return (
     <SidebarProvider>

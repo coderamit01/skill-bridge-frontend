@@ -1,26 +1,27 @@
-import { Env } from "@/env";
-import api from "@/lib/axios";
+import { clientFetch, serverFetch } from "@/lib/fetchApi";
 import { BookingStatus } from "@/types/booking.types";
 
+
 export const getBookings = async () => {
-  const res = await api.get("/bookings");
-  return res.data;
+  try {
+    const data = await serverFetch("/bookings",{
+      cache: "no-cache"
+    })
+    return data;
+  } catch (error:any) {
+    console.log("getBookings failed:", error.message);
+  }
 }
 
 export const updateBookingStatus = async ({ id, status }: { id: string, status: BookingStatus }) => {
-  const res = await api.put(`/bookings/${id}`, { status });
-  return res.data;
-}
-
-export const getBooks = async () => {
   try {
-    const res = await fetch(`${Env.runtimeEnv.NEXT_PUBLIC_API_URL}/bookings`, {
-      method: "GET",
-      credentials: "include",
-    });
-    const data = await res.json();
+    const data = await clientFetch(`/bookings/${id}`,{
+      method: "PUT",
+      body: JSON.stringify({status})
+    })
     return data;
-  } catch (error) {
-    console.log("Something went wrong", error);
+  } catch (error:any) {
+    console.log("Failed:", error.message);
   }
 }
+

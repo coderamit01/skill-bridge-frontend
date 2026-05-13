@@ -1,7 +1,3 @@
-"use client"
-
-import { getBookings } from "@/services/bookings.service";
-import { useQuery } from "@tanstack/react-query";
 import {
   Table,
   TableBody,
@@ -12,18 +8,11 @@ import {
 import { UserBookTable } from "@/components/table/UserBookTable";
 import { IBooking } from "@/types/booking.types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getBookings } from "@/services/bookings.service";
 
-export default function UserBookingsPage() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["userBookings"],
-    queryFn: getBookings,
-  })
-
-  if (isLoading) return <p className="p-6 text-gray-500">Loading bookings...</p>
-  if (isError) return <p className="p-6 text-red-500">Something went wrong. Please try again.</p>
-
+const UserBookingsPage = async () => {
+  const data = await getBookings();
   const booking: IBooking[] = data?.data ?? [];
-
   return (
     <Card className="gap-4">
       <CardHeader>
@@ -51,4 +40,6 @@ export default function UserBookingsPage() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default UserBookingsPage;

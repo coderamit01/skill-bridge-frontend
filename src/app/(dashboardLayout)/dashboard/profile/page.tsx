@@ -1,24 +1,28 @@
-import Link from "next/link"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Edit, Mail, Calendar, Star, BookOpen } from "lucide-react"
-import ProfileInfoStatsCard from "@/components/student/ProfileInfoStatsCard"
-import { BioCard } from "@/components/student/BioCard"
-import { getMe } from "@/components/common/WelcomeCard"
-
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Edit, Mail, Calendar, Star, BookOpen } from "lucide-react";
+import ProfileInfoStatsCard from "@/components/student/ProfileInfoStatsCard";
+import { BioCard } from "@/components/student/BioCard";
+import { getMe } from "@/lib/getMe";
 
 export default async function ProfilePage() {
-  const user = await getMe()
-  const totalBookings = user?.bookingsAsStudent?.length ?? 0
-  const totalReviews = user?.reviews?.length ?? 0
-  const avgRating = totalReviews > 0
-    ? (user.reviews.reduce((sum: number, r: any) => sum + Number(r.rating), 0) / totalReviews).toFixed(1)
-    : "N/A"
+  const { data: user } = await getMe();
+  const totalBookings = user?.bookingsAsStudent?.length ?? 0;
+  const totalReviews = user?.reviews?.length ?? 0;
+  const avgRating =
+    totalReviews > 0
+      ? (
+          user.reviews.reduce(
+            (sum: number, r: any) => sum + Number(r.rating),
+            0,
+          ) / totalReviews
+        ).toFixed(1)
+      : "N/A";
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
@@ -46,9 +50,13 @@ export default async function ProfilePage() {
                 {user?.role}
               </Badge>
               {user?.emailVerified ? (
-                <Badge className="bg-green-50 text-green-600 hover:bg-green-50">Verified</Badge>
+                <Badge className="bg-green-50 text-green-600 hover:bg-green-50">
+                  Verified
+                </Badge>
               ) : (
-                <Badge className="bg-red-50 text-red-500 hover:bg-red-50">Unverified</Badge>
+                <Badge className="bg-red-50 text-red-500 hover:bg-red-50">
+                  Unverified
+                </Badge>
               )}
             </div>
           </div>
@@ -72,7 +80,9 @@ export default async function ProfilePage() {
         />
       </div>
       <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
-        <h3 className="text-base font-semibold text-gray-900">Personal Information</h3>
+        <h3 className="text-base font-semibold text-gray-900">
+          Personal Information
+        </h3>
         <div className="border-t border-gray-100 pt-4 space-y-4">
           <BioCard
             icon={<Mail className="w-4 h-4 text-brand" />}
@@ -83,20 +93,22 @@ export default async function ProfilePage() {
             icon={<Calendar className="w-4 h-4 text-brand" />}
             label="Member Since"
             text={new Date(user?.createdAt).toLocaleDateString("en-US", {
-              year: "numeric", month: "long", day: "numeric"
+              year: "numeric",
+              month: "long",
+              day: "numeric",
             })}
           />
           <BioCard
             icon={<Edit className="w-4 h-4 text-brand" />}
             label="Bio"
-            text={user?.bio ?? (
-              <span className="text-gray-400 italic">
-                No bio yet.
-              </span>
-            )}
+            text={
+              user?.bio ?? (
+                <span className="text-gray-400 italic">No bio yet.</span>
+              )
+            }
           />
         </div>
       </div>
     </div>
-  )
+  );
 }

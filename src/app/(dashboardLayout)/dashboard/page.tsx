@@ -1,9 +1,11 @@
-
 import StudentDashboardStats from "@/components/student/StudentDashboardStats";
 import { WelcomeCard } from "@/components/common/WelcomeCard";
+import { getBookings } from "@/services/bookings.service";
+import { IBooking } from "@/types/booking.types";
 
-export default function StudentDashboard() {
-
+const StudentDashboard = async () => {
+  const data = await getBookings();
+  const bookings: IBooking[] = data?.data ?? [];
   return (
     <>
       <div className="grid grid-cols-12 gap-4">
@@ -11,10 +13,11 @@ export default function StudentDashboard() {
           <WelcomeCard />
         </div>
         <div className="col-span-12 xl:col-span-7">
-          <StudentDashboardStats />
+          <StudentDashboardStats bookings={bookings} />
         </div>
       </div>
-
     </>
   );
-}
+};
+
+export default StudentDashboard;

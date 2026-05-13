@@ -15,7 +15,7 @@ export const authClient = createAuthClient({
       },
     }),
   ],
-  baseURL: "http://localhost:5000",
+  baseURL: Env.runtimeEnv.BACKEND_URL,
   fetchOptions: {
     credentials: "include",
   },

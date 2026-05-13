@@ -34,6 +34,17 @@ export const updateUser = async (id: string, payload: IUpdatePayload) => {
   const res = await api.put(`/users/${id}`, payload);
   return res.data;
 }
+export const updateBookingStatus = async ({ id, status }: { id: string, status: BookingStatus }) => {
+  try {
+    const data = await clientFetch(`/bookings/${id}`,{
+      method: "PUT",
+      body: JSON.stringify({status})
+    })
+    return data;
+  } catch (error:any) {
+    console.log("Failed:", error.message);
+  }
+}
 
 export const logOut = async () => {
   const res = await api.post("/auth/logout");
