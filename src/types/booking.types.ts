@@ -1,6 +1,7 @@
 import { IReview } from "@/types/review.type";
 import { ITutor } from "@/types/tutor.types";
 import { Gender, IStudent } from "@/types/user.types";
+import { IAvailability } from "./availability.types";
 
 export enum BookingStatus {
   CONFIRMED = 'CONFIRMED',
@@ -8,10 +9,6 @@ export enum BookingStatus {
   CANCELLED = 'CANCELLED'
 }
 
-export interface IAvailability {
-  startTime: Date | string;
-  endTime: Date | string;
-}
 
 export interface IBooking {
   id: string;
