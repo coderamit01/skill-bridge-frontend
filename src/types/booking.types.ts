@@ -15,6 +15,7 @@ export interface IBooking {
   studentId: string;
   tutorId: string;
   availabilityId: string;
+  averageRating: number
   scheduleAt: Date | string;
   status: BookingStatus;
   totalPrice: number;

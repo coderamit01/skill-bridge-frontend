@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 
 
-export const StatsCard = ({ icon, title, count }: { icon: React.ReactNode; title: string; count: number }) => {
+export const StatsCard = ({ icon, title, count }: { icon: React.ReactNode; title: string; count: number | string }) => {
   return (
     <Card className="card">
       <CardContent className="flex gap-4">

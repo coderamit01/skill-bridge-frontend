@@ -8,6 +8,10 @@ export const tutorRoutes: Route[] = [
     url: '/tutor'
   },
   {
+    title: 'Booking',
+    url: '/tutor/booking'
+  },
+  {
     title: 'Availability',
     url: '/tutor/availability'
   },

@@ -1,4 +1,3 @@
-"use client";
 import {
   Select,
   SelectContent,
@@ -18,43 +17,44 @@ import {
 } from "@/components/ui/dialog";
 import { BookingStatus } from "@/types/booking.types";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { useState, useTransition } from "react";
 import { updateBookingStatus } from "@/actions/bookingAction";
+import { toast } from "sonner";
 
-export const BookingStatusModal = ({
+const TutorStatusUpdateModal = ({
   id,
   status,
   open,
   setOpen,
 }: {
-  id: string,
-  status: BookingStatus,
-  open: boolean,
+  id: string;
+  status: BookingStatus;
+  open: boolean;
   setOpen: (open: boolean) => void;
 }) => {
   const [selectedStatus, setSelectedStatus] = useState<BookingStatus>(status);
   const [isPending, startTransition] = useTransition();
   const isClosed = status === BookingStatus.CANCELLED || status === BookingStatus.COMPLETED;
 
-  const handleUpdate = () => {
+  const handleUpdateStatus = () => {
     startTransition(async () => {
       try {
         const result = await updateBookingStatus(id, selectedStatus);
         if (result.success) {
-          toast.success("Status updated successfully", { position: "top-right" });
+          toast.success("Booking status updated!", { position: "top-right" });
           setOpen(false);
         } else {
-          toast.error("Failed to update status", { position: "top-right" });
+          toast.error(result?.error ?? "Update failed", { position: "top-right" });
         }
       } catch (error: any) {
-        toast.error("Failed to update status", { position: "top-right" });
+        toast.error(error.message ?? "Update failed", { position: "top-right" });
       }
     })
   }
+
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-
       <DialogContent className="sm:max-w-sm" aria-describedby="">
         <DialogHeader>
           <DialogTitle>Update Booking Status</DialogTitle>
@@ -71,7 +71,7 @@ export const BookingStatusModal = ({
               <SelectGroup>
                 <SelectLabel>Status</SelectLabel>
                 {Object.keys(BookingStatus)
-                  .filter((k) => k !== BookingStatus.COMPLETED)
+                  .filter((k) => k !== BookingStatus.CANCELLED)
                   .map((k) => (
                     <SelectItem key={k} value={k}>
                       {k}
@@ -86,7 +86,7 @@ export const BookingStatusModal = ({
             <Button variant="outline" className="cursor-pointer">Cancel</Button>
           </DialogClose>
           <Button
-            onClick={handleUpdate}
+            onClick={handleUpdateStatus}
             disabled={isPending || isClosed}
             className="bg-brand hover:bg-brand-dark cursor-pointer text-white"
           >
@@ -95,5 +95,7 @@ export const BookingStatusModal = ({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
+
+export default TutorStatusUpdateModal

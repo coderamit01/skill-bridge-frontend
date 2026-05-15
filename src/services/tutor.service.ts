@@ -1,7 +1,14 @@
-import api from "@/lib/axios";
-import { ITutorRegister } from "@/types/tutor.types";
+import { serverFetch } from "@/lib/fetchApi";
 
-export const createTtutor = async (payload: ITutorRegister) => {
-  const res = await api.post("/users/create-tutor", payload);
-  return res.data;
+
+export const getTutorByID = async (id: string) => {
+  try {
+    const data = await serverFetch(`tutors/${id}`, {
+      method: "GET",
+      cache: "no-cache",
+    })
+    return data;
+  } catch (error: any) {
+    console.log("getBookings failed:", error.message);
+  }
 }

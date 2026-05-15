@@ -5,17 +5,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { UserBookTable } from "@/components/table/UserBookTable";
 import { IBooking } from "@/types/booking.types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBookings } from "@/services/bookings.service";
+import TutorBookingTable from "@/components/table/TutorBookingTable";
 
-const UserBookingsPage = async () => {
-  const data = await getBookings();
-  const booking: IBooking[] = data?.data ?? [];
+
+const TutorBooking = async () => {
+    const data = await getBookings();
+    const booking: IBooking[] = data?.data ?? [];
 
   return (
-    <Card className="gap-4">
+        <Card className="gap-4">
       <CardHeader>
         <CardTitle>My Bookings</CardTitle>
       </CardHeader>
@@ -23,7 +24,7 @@ const UserBookingsPage = async () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Tutor Name</TableHead>
+              <TableHead>Student Name</TableHead>
               <TableHead>Session Date</TableHead>
               <TableHead>Start</TableHead>
               <TableHead>End</TableHead>
@@ -34,13 +35,13 @@ const UserBookingsPage = async () => {
           </TableHeader>
           <TableBody>
             {booking.map((book) => (
-              <UserBookTable key={book.id} book={book} />
+              <TutorBookingTable key={book.id} book={book} />
             ))}
           </TableBody>
         </Table>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default UserBookingsPage;
+export default TutorBooking

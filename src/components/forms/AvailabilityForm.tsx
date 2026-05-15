@@ -1,38 +1,15 @@
 "use client";
 
 import { useForm } from "@tanstack/react-form";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { IAvailabilityPayload } from "@/types/availability.types";
-import { createAvailability } from "@/services/availabilityservice";
 import { toast } from "sonner";
-import * as z from "zod";
+import { createAvailability } from "@/actions/availabilityAction";
+import { availabilitySchema } from "@/validation/availabilitySchema";
 
-const availabilitySchema = z
-  .object({
-    date: z.string().min(1, "Date is required"),
-    startTime: z.string().min(1, "Start time is required"),
-    endTime: z.string().min(1, "End time is required"),
-  })
-  .refine(
-    (data) => {
-      const startDateTime = new Date(`${data.date}T${data.startTime}`);
-      return startDateTime > new Date();
-    },
-    { message: "Availability cannot be in the past" },
-  )
-  .refine(
-    (data) => {
-      const start = new Date(`${data.date}T${data.startTime}`);
-      const end = new Date(`${data.date}T${data.endTime}`);
-      return start < end;
-    },
-    {
-      message: "End time must be after start time",
-    },
-  );
+
 
 const AvailabilityForm = () => {
   const [isPending, starTransition] = useTransition();
@@ -44,38 +21,24 @@ const AvailabilityForm = () => {
       endTime: "",
     },
     validators: {
-      onSubmit: ({ value }) => {
-        const result = availabilitySchema.safeParse(value);
-        if (!result.success) {
-          return result.error.message;
-        }
-        return null;
-      },
-    },
-    onSubmitInvalid: () => {
-      const errors = form.state.errors;
-      console.log(errors);
-      if (errors && typeof errors === "object") {
-        const allErr = Object.values(errors).flat().filter(Boolean);
-        console.log(allErr[0]);
-      }
+      onSubmit: availabilitySchema
     },
     onSubmit: async ({ value }) => {
       starTransition(async () => {
         try {
-          const start = new Date(`${value.date}T${value.startTime}:00.000Z`);
-          const end = new Date(`${value.date}T${value.endTime}:00.000Z`);
+          const start = new Date(`${value.date}T${value.startTime}`);
+          const end = new Date(`${value.date}T${value.endTime}`);
 
           const result = await createAvailability({
             startTime: start,
             endTime: end,
           });
-          console.log(result);
           if (result.success) {
             toast.success("Availability created successfuly", {
               position: "top-right",
             });
           }
+          form.reset();
         } catch (error: any) {
           toast.error(error.message || "Failed to create availability", {
             position: "top-right",
