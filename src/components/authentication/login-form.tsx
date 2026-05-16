@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.email(),
-  password: z.string().min(8, "Password length required 8 character")
+  password: z.string().min(8, "Password length required 8 character"),
 });
 
 export function LoginForm({
@@ -51,9 +51,8 @@ export function LoginForm({
         form.reset();
 
         if (role === Role.ADMIN) router.push("/admin");
-        if (role === Role.TUTOR) router.push("/tutor")
+        if (role === Role.TUTOR) router.push("/tutor");
         if (role === Role.STUDENT) router.push("/dashboard");
-
       } catch (error) {
         console.log(error);
         toast.error("Failled to Login", { position: "top-right" });
@@ -63,11 +62,15 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <h2 className="text-center font-bold text-3xl ">Skill<span className="text-[#2EA2A3]">Bridge</span></h2>
+      <h2 className="text-center font-bold text-3xl ">
+        Skill<span className="text-[#2EA2A3]">Bridge</span>
+      </h2>
       <Card>
         <CardHeader className="text-start">
           <CardTitle className="text-xl">Sign in to account</CardTitle>
-          <CardDescription>Enter your email & password to login</CardDescription>
+          <CardDescription>
+            Enter your email & password to login
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -133,7 +136,12 @@ export function LoginForm({
               <Field className="gap-2 pt-3">
                 <form.Subscribe selector={(state) => state.isSubmitting}>
                   {(isSubmitting) => (
-                    <Button type="submit" disabled={isSubmitting} size="default" className="py-5 cursor-pointer">
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      size="default"
+                      className="py-5 cursor-pointer bg-brand hover:bg-brand-dark text-white"
+                    >
                       {isSubmitting ? "Logging..." : "Login"}
                     </Button>
                   )}
@@ -141,7 +149,12 @@ export function LoginForm({
 
                 <FieldDescription className="text-center">
                   Don&apos;t have an account?{" "}
-                  <Link href="/signup" className="text-violet-600 hover:underline">Sign up</Link>
+                  <Link
+                    href="/signup"
+                    className="text-violet-600 hover:underline"
+                  >
+                    Sign up
+                  </Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

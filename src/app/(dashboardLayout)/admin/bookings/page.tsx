@@ -8,22 +8,22 @@ import {
 import { IBooking } from "@/types/booking.types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBookings } from "@/services/bookings.service";
-import TutorBookingTable from "@/components/table/TutorBookingTable";
+import AdminBookingTable from "@/components/table/AdminBookingTable";
 
-
-const TutorBooking = async () => {
-    const data = await getBookings();
-    const booking: IBooking[] = data?.data ?? [];
+const AdminBooking = async () => {
+  const data = await getBookings();
+  const booking: IBooking[] = data?.data ?? [];
 
   return (
-        <Card className="gap-4">
+    <Card className="gap-4">
       <CardHeader>
-        <CardTitle>My Bookings</CardTitle>
+        <CardTitle>All Bookings</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>Tutor Name</TableHead>
               <TableHead>Student Name</TableHead>
               <TableHead>Session Date</TableHead>
               <TableHead>Start</TableHead>
@@ -35,13 +35,13 @@ const TutorBooking = async () => {
           </TableHeader>
           <TableBody>
             {booking.map((book) => (
-              <TutorBookingTable key={book.id} book={book} />
+              <AdminBookingTable key={book.id} book={book} />
             ))}
           </TableBody>
         </Table>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default TutorBooking
+export default AdminBooking;

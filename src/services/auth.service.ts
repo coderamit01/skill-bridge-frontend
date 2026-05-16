@@ -1,6 +1,6 @@
 import { Env } from "@/env";
 import api from "@/lib/axios"
-import { clientFetch } from "@/lib/fetchApi";
+import { clientFetch, serverFetch } from "@/lib/fetchApi";
 import { ILoginPayload, IRegisterPayload, IUpdatePayload } from "@/types/user.types";
 import { NextRequest } from "next/server";
 
@@ -51,4 +51,15 @@ export const getUser = async (req: NextRequest) => {
 export const logOut = async () => {
   const res = await api.post("/auth/logout");
   return res.data;
+}
+
+export const getAllUser = async() => {
+  try {
+    const data = await serverFetch("/users", {
+      method: "GET",
+    });
+    return data.data;
+  } catch {
+    return {success: false, message: "Login failled"};
+  }
 }

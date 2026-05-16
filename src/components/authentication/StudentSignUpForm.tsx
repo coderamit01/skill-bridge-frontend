@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { userRegister } from "@/services/auth.service";
 import { IRegisterPayload, Role } from "@/types/user.types";
@@ -10,41 +10,41 @@ import {
   Field,
   FieldError,
   FieldGroup,
-  FieldLabel
-} from "@/components/ui/field"
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
 
 const formSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   role: z.nativeEnum(Role),
   password: z.string().min(8, "Minimum length is 8"),
-})
+});
 
 export const StudentSignUpForm = () => {
-
   const form = useForm({
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      role: Role.STUDENT as Role
+      role: Role.STUDENT as Role,
     } satisfies IRegisterPayload,
     validators: {
-      onSubmit: formSchema
+      onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
       try {
         await userRegister(value);
-        toast.success("Account created successfully!", { position: "top-right" })
+        toast.success("Account created successfully!", {
+          position: "top-right",
+        });
         form.reset();
       } catch (error: any) {
-        toast.error(error.response?.data?.message || "Registration failed")
+        toast.error(error.response?.data?.message || "Registration failed");
       }
-    }
+    },
   });
 
   return (
@@ -59,7 +59,8 @@ export const StudentSignUpForm = () => {
         <form.Field
           name="name"
           children={(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field className="gap-2">
                 <FieldLabel htmlFor={field.name}>Full Name</FieldLabel>
@@ -73,17 +74,16 @@ export const StudentSignUpForm = () => {
                   placeholder="Your name"
                   className="h-11"
                 />
-                {isInvalid && (
-                  <FieldError errors={field.state.meta.errors} />
-                )}
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
-            )
+            );
           }}
         />
         <form.Field
           name="email"
           children={(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field className="gap-2">
                 <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -97,18 +97,17 @@ export const StudentSignUpForm = () => {
                   placeholder="Your email"
                   className="h-11"
                 />
-                {isInvalid && (
-                  <FieldError errors={field.state.meta.errors} />
-                )}
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
-            )
+            );
           }}
         />
 
         <form.Field
           name="password"
           children={(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field className="gap-2">
                 <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -122,26 +121,31 @@ export const StudentSignUpForm = () => {
                   placeholder="Your password"
                   className="h-11"
                 />
-                {isInvalid && (
-                  <FieldError errors={field.state.meta.errors} />
-                )}
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
-            )
+            );
           }}
         />
         <Field>
           <form.Subscribe selector={(state) => state.isSubmitting}>
             {(isSubmitting) => (
-              <Button type="submit" disabled={isSubmitting} className="w-full cursor-pointer py-5">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full cursor-pointer py-5 bg-brand hover:bg-brand-dark text-white"
+              >
                 {isSubmitting ? "Creating account..." : "Create Account"}
               </Button>
             )}
           </form.Subscribe>
           <p className="text-center text-sm text-muted-foreground">
-            Already have an account? <Link href="/login" className="text-violet-600 hover:underline">Sign in</Link>
+            Already have an account?{" "}
+            <Link href="/login" className="text-violet-600 hover:underline">
+              Sign in
+            </Link>
           </p>
         </Field>
       </FieldGroup>
     </form>
-  )
-}
+  );
+};

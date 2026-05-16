@@ -9,7 +9,7 @@ export const tutorRoutes: Route[] = [
   },
   {
     title: 'Booking',
-    url: '/tutor/booking'
+    url: '/tutor/bookings'
   },
   {
     title: 'Availability',
