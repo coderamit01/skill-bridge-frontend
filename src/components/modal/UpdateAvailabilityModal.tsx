@@ -47,7 +47,7 @@ const UpdateAvailabilityModal = ({
 
         const result = await updateAvailability(id, { startTime: start, endTime: end });
 
-        if (result.success) {
+        if (result?.success) {
           toast.success("Availability updated successfully", {
             position: "top-right",
           });

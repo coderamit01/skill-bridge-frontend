@@ -33,7 +33,7 @@ const AvailabilityForm = () => {
             startTime: start,
             endTime: end,
           });
-          if (result.success) {
+          if (result?.success) {
             toast.success("Availability created successfuly", {
               position: "top-right",
             });

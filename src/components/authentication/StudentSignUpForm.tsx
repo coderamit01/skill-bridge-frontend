@@ -36,12 +36,15 @@ export const StudentSignUpForm = () => {
     },
     onSubmit: async ({ value }) => {
       try {
-        await userRegister(value);
-        toast.success("Account created successfully!", {
-          position: "top-right",
-        });
+        const result = await userRegister(value);
+        if (result?.success) {
+          toast.success("Account created successfully!", { position: "top-right" });
+        } else {
+          toast.error(result?.message || "Registration failed", { position: "top-right" });
+        }
         form.reset();
       } catch (error: any) {
+        console.log(error);
         toast.error(error.response?.data?.message || "Registration failed");
       }
     },
@@ -89,6 +92,7 @@ export const StudentSignUpForm = () => {
                 <FieldLabel htmlFor={field.name}>Email</FieldLabel>
                 <Input
                   id={field.name}
+                  type="email"
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
@@ -113,6 +117,7 @@ export const StudentSignUpForm = () => {
                 <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                 <Input
                   id={field.name}
+                  type="password"
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}

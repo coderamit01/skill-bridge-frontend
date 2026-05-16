@@ -9,14 +9,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllCategory } from "@/services/category.service";
 import CategoryTable from "@/components/table/CategoryTable";
 import { Category } from "@/types/category.types";
+import CategoryForm from "@/components/forms/CategoryForm";
 
 const AdminCategories = async () => {
   const data = await getAllCategory();
   const categories: Category[] = data?.data;
-  console.log(categories);
   return (
-    <div className="gird grid-cols-12 gap-5">
-      <div className="col-span-12 lg:col-span-5">
+    <div className="grid grid-cols-12 gap-5">
+      <div className="col-span-12 lg:col-span-7">
         <Card className="gap-4">
           <CardHeader>
             <CardTitle>All Categories</CardTitle>
@@ -26,7 +26,7 @@ const AdminCategories = async () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Category Name</TableHead>
-                  <TableHead>Action</TableHead>
+                  <TableHead className="text-end">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -38,7 +38,9 @@ const AdminCategories = async () => {
           </CardContent>
         </Card>
       </div>
-      <div></div>
+      <div className="col-span-12 lg:col-span-5">
+        <CategoryForm />
+      </div>
     </div>
   );
 };

@@ -16,9 +16,10 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
-import { createTtutor } from "@/services/tutor.service";
 import { toast } from "sonner";
 import { ITutorRegister } from "@/types/tutor.types";
+import { userRegister } from "@/services/auth.service";
+import { createTtutor } from "@/services/tutor.service";
 
 const formSchema = z.object({
   name: z.string(),
@@ -40,8 +41,13 @@ export const TutorSignUpForm = () => {
     },
     onSubmit: async ({ value }) => {
       try {
-        await createTtutor(value);
-        toast.success("Tutor created successfully!", { position: "top-right" });
+        const result = await createTtutor(value);
+        console.log(result);
+        if (result?.success) {
+          toast.success("Tutor created successfully!", { position: "top-right" });
+        } else {
+          toast.error(result?.message || "Registration failed", { position: "top-right" });
+        }
         form.reset();
       } catch (error: any) {
         toast.error(error.response?.data?.message || "Registration failed");
@@ -92,6 +98,7 @@ export const TutorSignUpForm = () => {
                 <Input
                   id={field.name}
                   name={field.name}
+                  type="email"
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
@@ -143,6 +150,7 @@ export const TutorSignUpForm = () => {
                 <Input
                   id={field.name}
                   name={field.name}
+                  type="password"
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}

@@ -12,21 +12,9 @@ export interface ITutorProfilePayload {
 
 export const updateTutor = async (payload: ITutorProfilePayload) => {
   try {
-    // Convert string numbers to actual numbers
-    const tutorPayload = {
-      ...payload,
-      hourlyRate: payload.hourlyRate ? parseFloat(payload.hourlyRate as string) : undefined,
-      yearsExperience: payload.yearsExperience ? parseFloat(payload.yearsExperience as string) : undefined,
-    };
-
-    // Remove undefined fields
-    Object.keys(tutorPayload).forEach(key =>
-      tutorPayload[key as keyof typeof tutorPayload] === undefined && delete tutorPayload[key as keyof typeof tutorPayload]
-    );
-
     const data = await serverFetch(`/tutors/profile`, {
       method: "PUT",
-      body: JSON.stringify(tutorPayload),
+      body: JSON.stringify(payload),
     })
     revalidatePath("/tutor/profile");
     return { success: true, data };

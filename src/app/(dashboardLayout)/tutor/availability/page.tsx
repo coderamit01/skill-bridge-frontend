@@ -1,7 +1,7 @@
 import AvailabilityForm from "@/components/forms/AvailabilityForm";
 import TutorAvailabilityTable from "@/components/table/TutorAvailabilityTable";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAvailability } from "@/services/availabilityservice";
+import { getAvailability } from "@/services/availability.service";
 import { Suspense } from "react";
 
 export default async function Availability() {

@@ -11,7 +11,7 @@ export const userRegister = async (payload: IRegisterPayload) => {
       method: "POST",
       body: JSON.stringify(payload),
     });
-    return data.data;
+    return data;
   } catch {
     return {success: false, message: "Registration failled"};
   }
@@ -23,7 +23,7 @@ export const userLogin = async (payload: ILoginPayload) => {
       method: "POST",
       body: JSON.stringify(payload),
     });
-    return data.data;
+    return data;
   } catch {
     return {success: false, message: "Login failled"};
   }

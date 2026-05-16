@@ -1,4 +1,5 @@
-import { serverFetch } from "@/lib/fetchApi";
+import { clientFetch, serverFetch } from "@/lib/fetchApi";
+import { ITutorRegister } from "@/types/tutor.types";
 
 
 export const getTutorByID = async (id: string) => {
@@ -6,6 +7,18 @@ export const getTutorByID = async (id: string) => {
     const data = await serverFetch(`tutors/${id}`, {
       method: "GET",
       cache: "no-cache",
+    })
+    return data;
+  } catch (error: any) {
+    console.log("getBookings failed:", error.message);
+  }
+}
+
+export const createTtutor = async (payload: ITutorRegister) => {
+  try {
+    const data = await clientFetch("/users/create-tutor", {
+      method: "POST",
+      body: JSON.stringify(payload),
     })
     return data;
   } catch (error: any) {

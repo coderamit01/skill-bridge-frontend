@@ -29,7 +29,7 @@ const AvailabilityTableRow = ({ available }: { available: IAvailability }) => {
     startTransition(async () => {
       try {
         const result = await deleteAvailability(id);
-        if (result.success) {
+        if (result?.success) {
           toast.success("Availability deleted successfully", {
             position: "top-right",
           });
@@ -41,7 +41,7 @@ const AvailabilityTableRow = ({ available }: { available: IAvailability }) => {
       }
     })
   }
-  const handleOpen= () => {
+  const handleOpen = () => {
     setIsOpen(true);
   }
 

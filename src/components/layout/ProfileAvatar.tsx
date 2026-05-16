@@ -36,10 +36,14 @@ export function DropdownMenuAvatar({ profile }: { profile: IUser }) {
 
   const handleLogOut = async () => {
     try {
-      await authClient.signOut();
-      await logOut();
+      const result = await logOut();
+      if (result?.success) {
+        toast.success("Logged out successfully!", { position: "top-right" });
+      } else {
+        toast.error(result?.message || "Failed to log out", { position: "top-right" });
+      }
       router.push("/login");
-      toast.success("Logged out successfully!", { position: "top-right" });
+
     } catch (error) {
       toast.error("Failed to log out. Please try again.", { position: "top-right" });
     }

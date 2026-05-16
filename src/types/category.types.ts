@@ -1,5 +1,8 @@
 import { Subject } from "./subject.types";
 
+export interface ICategory {
+  name: string
+}
 export interface Category {
   id: string;
   name: string;

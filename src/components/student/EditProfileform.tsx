@@ -28,8 +28,8 @@ const EditProfileform = ({ user }: IEditProfileForm) => {
     onSubmit: async ({ value }) => {
       startTransition(async () => {
         const result = await updateUser(user.id, value);
-        
-        if (result.success) {
+
+        if (result?.success) {
           toast.success("Profile updated!");
         } else {
           toast.error(result.error ?? "Something went wrong");

@@ -27,10 +27,10 @@ export const EditUserProfileForm = ({ user }: IEditUserProfileForm) => {
     onSubmit: async ({ value }) => {
       startTransition(async () => {
         const result = await updateUserProfile(value);
-        if (result.success) {
-          toast.success("Profile updated!",{position: "top-right"});
+        if (result?.success) {
+          toast.success("Profile updated!", { position: "top-right" });
         } else {
-          toast.error(result.error ?? "Something went wrong", {position: "top-right"});
+          toast.error(result.error ?? "Something went wrong", { position: "top-right" });
         }
       })
     }

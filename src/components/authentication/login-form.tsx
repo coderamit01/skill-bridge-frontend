@@ -45,7 +45,7 @@ export function LoginForm({
     onSubmit: async ({ value }) => {
       try {
         const data = await userLogin(value);
-        const role = data?.user?.role;
+        const role = data?.data?.user?.role;
         toast.success("Successfully Login", { position: "top-right" });
 
         form.reset();
@@ -92,6 +92,7 @@ export function LoginForm({
                       <Input
                         id={field.name}
                         name={field.name}
+                        type="email"
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
@@ -118,6 +119,7 @@ export function LoginForm({
                       <Input
                         id={field.name}
                         name={field.name}
+                        type="password"
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}

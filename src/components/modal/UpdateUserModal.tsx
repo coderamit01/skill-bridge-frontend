@@ -51,7 +51,7 @@ const UpdateUserModal = ({
       try {
         const result = await updateUser(id, value);
 
-        if (result.success) {
+        if (result?.success) {
           toast.success("Updated user successfully", {
             position: "top-right",
           });

@@ -28,10 +28,10 @@ export const EditTutorForm = ({ user }: IEditTutorProfileForm) => {
     onSubmit: async ({ value }) => {
       startTransition(async () => {
         const result = await updateTutor(value);
-        if (result.success) {
-          toast.success("Tutor profile updated!", {position: "top-right"});
+        if (result?.success) {
+          toast.success("Tutor profile updated!", { position: "top-right" });
         } else {
-          toast.error(result.error ?? "Something went wrong", {position: "top-right"});
+          toast.error(result.error ?? "Something went wrong", { position: "top-right" });
         }
       })
     }
