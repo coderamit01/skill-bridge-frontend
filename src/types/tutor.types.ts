@@ -1,4 +1,8 @@
 import { Gender, Role } from "@/types/user.types";
+import { IReview } from "./review.type";
+import { IAvailability } from "./availability.types";
+import { IBooking } from "./booking.types";
+import { Subject } from "./subject.types";
 
 export interface ITutorRegister {
   name: string,
@@ -12,6 +16,18 @@ export interface ITutor {
   email: string;
   gender: Gender;
   image: string | null;
+}
+interface TutorBooking {
+  id: string;
+  studentId: string;
+  tutorId: string;
+  availabilityId: string;
+  averageRating: number
+  scheduleAt: Date | string;
+  totalPrice: number;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  availability: IAvailability;
 }
 
 export interface ITutorDetails {
@@ -28,4 +44,8 @@ export interface ITutorDetails {
   isAvailable: boolean;
   createdAt: Date | string;
   updatedAt: Date | string;
+  review: IReview,
+  availablity: IAvailability,
+  bookings: TutorBooking,
+  subjects: Subject,
 }

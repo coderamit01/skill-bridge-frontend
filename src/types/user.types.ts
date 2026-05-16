@@ -17,7 +17,7 @@ export enum Gender {
 export interface IStudent {
   name: string;
   email: string;
-  image: string | null;
+  image: string;
 }
 
 export interface IRegisterPayload {

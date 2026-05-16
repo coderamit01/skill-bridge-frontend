@@ -1,15 +1,17 @@
 import { WelcomeCard } from "@/components/common/WelcomeCard";
 import { TutorDashboardStats } from "@/components/tutor/TutorDashboardStats";
+import UpcommingSession from "@/components/tutor/UpcommingSession";
 import { getMe } from "@/lib/getMe";
 import { getBookings } from "@/services/bookings.service";
 import { IBooking } from "@/types/booking.types";
+import { ITutorDetails } from "@/types/tutor.types";
 
 const AdminDashboard = async () => {
   const data = await getBookings();
   const bookings: IBooking[] = data?.data ?? [];
-  const {data:user} = await getMe();
-  const tutor: IBooking = user?.tutor;
-  console.log(tutor);
+  const { data: user } = await getMe();
+  const tutor: ITutorDetails = user?.tutor;
+
   return (
     <>
       <div className="grid grid-cols-12 gap-4">
@@ -17,11 +19,11 @@ const AdminDashboard = async () => {
           <WelcomeCard />
         </div>
         <div className="col-span-12 xl:col-span-7">
-          Blank 
+          <UpcommingSession bookings={bookings} />
         </div>
-        <div className="col-span-12">
-          <TutorDashboardStats bookings={bookings} tutor={tutor} />
-        </div>
+      </div>
+      <div className="pt-5">
+        <TutorDashboardStats bookings={bookings} tutor={tutor} />
       </div>
     </>
   );
