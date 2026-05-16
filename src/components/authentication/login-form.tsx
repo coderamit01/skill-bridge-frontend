@@ -20,7 +20,7 @@ import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import { ILoginPayload, Role } from "@/types/user.types";
+import { Role } from "@/types/user.types";
 import { userLogin } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 
@@ -38,7 +38,7 @@ export function LoginForm({
     defaultValues: {
       email: "",
       password: "",
-    } satisfies ILoginPayload,
+    },
     validators: {
       onSubmit: formSchema,
     },

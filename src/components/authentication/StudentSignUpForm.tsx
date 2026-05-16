@@ -1,7 +1,7 @@
 "use client";
 
 import { userRegister } from "@/services/auth.service";
-import { IRegisterPayload, Role } from "@/types/user.types";
+import { Role } from "@/types/user.types";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -30,7 +30,7 @@ export const StudentSignUpForm = () => {
       email: "",
       password: "",
       role: Role.STUDENT as Role,
-    } satisfies IRegisterPayload,
+    },
     validators: {
       onSubmit: formSchema,
     },

@@ -1,4 +1,5 @@
 "use client";
+import { updateUser } from "@/actions/studentProfileAction";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { updateUser } from "@/services/user.service";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 

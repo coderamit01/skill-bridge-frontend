@@ -17,8 +17,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
-import { ITutorRegister } from "@/types/tutor.types";
-import { userRegister } from "@/services/auth.service";
 import { createTtutor } from "@/services/tutor.service";
 
 const formSchema = z.object({
@@ -35,7 +33,7 @@ export const TutorSignUpForm = () => {
       email: "",
       gender: "" as Gender,
       password: "",
-    } satisfies ITutorRegister,
+    },
     validators: {
       onSubmit: formSchema,
     },
