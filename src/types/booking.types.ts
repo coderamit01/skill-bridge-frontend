@@ -1,5 +1,5 @@
 import { IReview } from "@/types/review.type";
-import { ITutor } from "@/types/tutor.types";
+import { ITutor, ITutorDetails } from "@/types/tutor.types";
 import { Gender, IStudent } from "@/types/user.types";
 import { IAvailability } from "./availability.types";
 
@@ -21,7 +21,7 @@ export interface IBooking {
   totalPrice: number;
   createdAt: Date | string;
   updatedAt: Date | string;
-  tutor: ITutor;
+  tutor: ITutorDetails;
   student: IStudent;
   availability: IAvailability;
   review: IReview;

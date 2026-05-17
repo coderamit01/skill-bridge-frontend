@@ -37,37 +37,37 @@ export const TutorDashboardStats = ({
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <StatsCard
-        icon={<Calendar className="text-blue-500" />}
+        icon={<Calendar className="h-10 w-10 p-2 rounded bg-blue-50 text-blue-700" />}
         title="Total Sessions"
         count={stats.total}
       />
       <StatsCard
-        icon={<Clock className="text-yellow-500" />}
+        icon={<Clock className="h-10 w-10 p-2 rounded bg-yellow-50 text-yellow-700" />}
         title="Upcoming Sessions"
         count={stats.upcoming}
       />
       <StatsCard
-        icon={<CheckCircle className="text-green-500" />}
+        icon={<CheckCircle className="h-10 w-10 p-2 rounded bg-green-50 text-green-700" />}
         title="Completed Sessions"
         count={stats.completed}
       />
       <StatsCard
-        icon={<XCircle className="text-red-500" />}
+        icon={<XCircle className="h-10 w-10 p-2 rounded bg-red-50 text-red-700" />}
         title="Cancelled Sessions"
         count={stats.cancelled}
       />
       <StatsCard
-        icon={<Star className="text-yellow-400" />}
+        icon={<Star className="h-10 w-10 p-2 rounded bg-yellow-50 text-yellow-700" />}
         title="Average Rating"
         count={`${stats.averageRating} ⭐`}
       />
       <StatsCard
-        icon={<MessageSquare className="text-purple-500" />}
+        icon={<MessageSquare className="h-10 w-10 p-2 rounded bg-purple-50 text-purple-700" />}
         title="Total Reviews"
         count={stats.totalReviews}
       />
       <StatsCard
-        icon={<DollarSign className="text-emerald-500" />}
+        icon={<DollarSign className="h-10 w-10 p-2 rounded bg-emerald-50 text-emerald-700" />}
         title="Total Earnings"
         count={`$${stats.totalEarnings}`}
       />

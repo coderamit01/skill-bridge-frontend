@@ -21,28 +21,28 @@ const StudentDashboardStats = async ({
     <div className="grid grid-cols-12 gap-4">
       <div className="col-span-12 md:col-span-6">
         <StatsCard
-          icon={<Calendar className="text-blue-500" />}
+          icon={<Calendar className="h-10 w-10 p-2 rounded bg-blue-50 text-blue-700" />}
           title="Total Bookings"
           count={stats.total}
         />
       </div>
       <div className="col-span-12 md:col-span-6">
         <StatsCard
-          icon={<Clock className="text-purple-500" />}
+          icon={<Clock className="h-10 w-10 p-2 rounded bg-purple-50 text-purple-700" />}
           title="Upcoming Sessions"
           count={stats.upComming}
         />
       </div>
       <div className="col-span-12 md:col-span-6">
         <StatsCard
-          icon={<CheckCircle className="text-green-500" />}
+          icon={<CheckCircle className="h-10 w-10 p-2 rounded bg-green-50 text-green-700" />}
           title="Completed Sessions"
           count={stats.complete}
         />
       </div>
       <div className="col-span-12 md:col-span-6">
         <StatsCard
-          icon={<XCircle className="text-red-500" />}
+          icon={<XCircle className="h-10 w-10 p-2 rounded bg-red-50 text-red-700" />}
           title="Cancelled Sessions"
           count={stats.cancelled}
         />
