@@ -9,7 +9,6 @@ import { IBooking } from "@/types/booking.types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBookings } from "@/services/bookings.service";
 import AdminBookingTable from "@/components/table/AdminBookingTable";
-export const dynamic = "force-dynamic";
 
 const AdminBooking = async () => {
   const data = await getBookings();

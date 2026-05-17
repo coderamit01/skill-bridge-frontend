@@ -19,7 +19,7 @@ export const adminRoutes: Route[] = [
     url: '/admin/categories'
   },
   {
-    title: 'Subjects',
-    url: '/admin/subjects'
+    title: 'Profile',
+    url: '/admin/profile'
   },
 ]
