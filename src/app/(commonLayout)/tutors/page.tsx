@@ -5,6 +5,7 @@ import { Search, Sliders } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import PageTitle from "@/components/frontend/PageTitle";
 
 const allTutors = [
   {
@@ -130,12 +131,7 @@ export default function TutorsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-violet-600 to-violet-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Browse Tutors</h1>
-          <p className="text-violet-100 text-lg">Find the perfect tutor for your learning goals</p>
-        </div>
-      </div>
+     <PageTitle title="Browse Tutors" subText="Find the perfect tutor for your learning goals" />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
