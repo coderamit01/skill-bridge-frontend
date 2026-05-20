@@ -1,4 +1,4 @@
-import { Gender, Role } from "@/types/user.types";
+import { Gender, IUser, Role } from "@/types/user.types";
 import { IReview } from "./review.type";
 import { IAvailability } from "./availability.types";
 import { IBooking } from "./booking.types";
@@ -45,7 +45,8 @@ export interface ITutorDetails {
   createdAt: Date | string;
   updatedAt: Date | string;
   review: IReview,
-  availablity: IAvailability,
-  bookings: TutorBooking,
-  subjects: Subject,
+  availablity: IAvailability[],
+  bookings: TutorBooking[],
+  subjects: Subject[],
+  user: IUser
 }

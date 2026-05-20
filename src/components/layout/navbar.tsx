@@ -6,55 +6,61 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+
+export interface NavItem {
+  name: string,
+  path: string
+}
+
+const navLink: NavItem[] = [
+  { name: "Home", path: "/" },
+  { name: "Tutors", path: "/tutors" },
+  { name: "About Us", path: "/about-us" },
+  { name: "Contact", path: "/contact" },
+]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathName = usePathname();
 
+
+  const isActive = (url: string) => {
+    return pathName === url
+  }
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-md">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-           <Image src="/logo.png" className="w-full" alt="Skill Bridge" width={40} height={40} />
-          </Link>
-
+          <h2 className="text-2xl font-semibold">
+            <Link href="/" className="flex items-center gap-2 group">
+              Skill<span className="text-brand">Bridge</span>
+            </Link>
+          </h2>
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link
-              href="/"
-              className="text-sm font-semibold text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              href="/tutors"
-              className="text-sm font-semibold text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              Tutors
-            </Link>
-            <a
-              href="#how-it-works"
-              className="text-sm font-semibold text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              How it Works
-            </a>
+            {navLink.map((item, id) => (
+              <Link key={id}
+                href={item.path} className={`text-base font-semibold hover:text-brand transition-colors ${isActive(item.path) ? "text-brand" : "text-gray-700"}`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
 
-          {/* Auth Buttons - Desktop */}
           <div className="hidden md:flex items-center gap-4">
             <Button
               asChild
               variant="ghost"
-              className="text-sm font-semibold text-gray-600 hover:text-violet-600 hover:bg-violet-50"
+              className="text-base font-semibold text-gray-700 hover:text-brand hover:bg-green-50"
             >
               <Link href="/login">Login</Link>
             </Button>
             <Button
               asChild
-              className="rounded-full bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-700 hover:to-violet-800 text-white px-6 py-2.5 text-sm font-bold shadow-md hover:shadow-lg transition-all"
+              className="rounded-full bg-brand hover:bg-brand-dark text-white px-6 py-2.5 text-sm font-bold shadow-md hover:shadow-lg transition-all"
             >
-              <Link href="/tutors">Find a Tutor →</Link>
+              <Link href="/signup">Register</Link>
             </Button>
           </div>
 
@@ -71,28 +77,17 @@ export function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden border-t border-gray-100">
+
             <div className="px-4 py-4 space-y-4">
-              <Link
-                href="/"
-                className="block text-sm font-semibold text-gray-600 hover:text-violet-600"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                href="/tutors"
-                className="block text-sm font-semibold text-gray-600 hover:text-violet-600"
-                onClick={() => setIsOpen(false)}
-              >
-                Tutors
-              </Link>
-              <a
-                href="#how-it-works"
-                className="block text-sm font-semibold text-gray-600 hover:text-violet-600"
-                onClick={() => setIsOpen(false)}
-              >
-                How it Works
-              </a>
+              {navLink.map((item, id) => (
+                <Link key={id}
+                  href={item.path}
+                  className="block text-base font-semibold text-gray-700 hover:text-brand"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
               <div className="space-y-2 pt-4 border-t border-gray-100">
                 <Button
                   asChild
@@ -104,10 +99,10 @@ export function Navbar() {
                 </Button>
                 <Button
                   asChild
-                  className="w-full rounded-full bg-gradient-to-r from-violet-600 to-violet-700 text-white font-bold"
+                  className="w-full rounded-full bg-brand hover:bg-brand-dark text-white font-bold"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/tutors">Find a Tutor →</Link>
+                  <Link href="/signup">Register</Link>
                 </Button>
               </div>
             </div>

@@ -16,8 +16,8 @@ import SubjectAddForm from "@/components/forms/SubjectAddForm";
 const TutorSubject = async () => {
   const data = await getAllSubject();
   const subjects: Subject[] = data?.data || [];
-    const categoryData = await getAllCategory();
-    const categories: Category[] = categoryData?.data;
+  const categoryData = await getAllCategory();
+  const categories: Category[] = categoryData?.data;
 
   return (
     <div className="grid grid-cols-12 gap-5">
