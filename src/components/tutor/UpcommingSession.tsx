@@ -4,8 +4,23 @@ import { Avatar } from "../ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 const UpcommingSession = ({ bookings }: { bookings: IBooking[] }) => {
+  if (!bookings || bookings.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Upcoming Session</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            No upcoming sessions found.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
   const boking = bookings[0];
-  const { student, availability, status } = bookings[0];
+  const { student, availability, status } = boking;
 
   const start = new Date(availability.startTime);
   const end = new Date(availability.endTime);

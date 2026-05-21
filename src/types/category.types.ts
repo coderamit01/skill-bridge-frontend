@@ -8,5 +8,5 @@ export interface Category {
   name: string;
   slug: string;
   iconUrl: string;
-  subject: Subject;
+  subject: Subject[];
 }
