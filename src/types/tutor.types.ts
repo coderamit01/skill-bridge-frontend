@@ -44,7 +44,7 @@ export interface ITutorDetails {
   isAvailable: boolean;
   createdAt: Date | string;
   updatedAt: Date | string;
-  review: IReview,
+  reviews: IReview[],
   availablity: IAvailability[],
   bookings: TutorBooking[],
   subjects: Subject[],

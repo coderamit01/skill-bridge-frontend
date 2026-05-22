@@ -1,3 +1,4 @@
+
 import { Env } from "@/env";
 import { cookies } from "next/headers";
 
@@ -11,6 +12,7 @@ export const getMe = async () => {
         cookie: cookieStore.toString(),
       },
     });
+    if(!res.ok) return {data: null};
     return res.json();
   } catch (error:any) {
     console.log("Failed to load user", error.message);

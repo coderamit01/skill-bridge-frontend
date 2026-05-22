@@ -19,6 +19,7 @@ export const EditTutorForm = ({ user }: IEditTutorProfileForm) => {
 
   const form = useForm({
     defaultValues: {
+      name: user.tutor?.name,
       contactNumber: user.tutor?.contactNumber || "",
       gender: user.tutor?.gender || Gender.MALE,
       hourlyRate: user.tutor?.hourlyRate || "",
@@ -43,6 +44,24 @@ export const EditTutorForm = ({ user }: IEditTutorProfileForm) => {
         onSubmit={(e) => { e.preventDefault(); form.handleSubmit() }}
         className="space-y-5"
       >
+        <form.Field name="name">
+          {(field) => {
+            return (
+              <div>
+                <FieldLabel className="text-sm font-medium text-gray-700 block mb-1.5">
+                  Name
+                </FieldLabel>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                />
+              </div>
+            )
+          }}
+        </form.Field>
         <form.Field name="contactNumber">
           {(field) => {
             return (
@@ -71,7 +90,7 @@ export const EditTutorForm = ({ user }: IEditTutorProfileForm) => {
                   Gender
                 </FieldLabel>
                 <Select value={field.state.value} onValueChange={(value) => field.handleChange(value as Gender)}>
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select gender" />
                   </SelectTrigger>
                   <SelectContent>

@@ -9,6 +9,10 @@ export enum BookingStatus {
   CANCELLED = 'CANCELLED'
 }
 
+export interface BookingPayload {
+  tutorId: string,
+  availabilityId: string
+}
 
 export interface IBooking {
   id: string;

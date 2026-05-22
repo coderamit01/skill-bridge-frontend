@@ -13,6 +13,7 @@ export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const { data: user } = await getMe();
+  
 
   return (
     <SidebarProvider>
