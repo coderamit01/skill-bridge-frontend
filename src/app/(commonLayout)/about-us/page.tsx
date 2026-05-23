@@ -8,31 +8,33 @@ export default function AboutPage() {
         className="relative overflow-hidden  text-white bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(${titleBg.src})` }}
       >
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative container mx-auto px-4 py-24 md:py-32">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-              About Skill Bridge
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-100 mb-8">
-              Empowering students to reach their full potential through
-              personalized tutoring
-            </p>
+        <div className="max-w-310 mx-auto">
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="relative container mx-auto px-4 py-24 md:py-32">
+            <div className="text-center">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                About Skill Bridge
+              </h1>
+              <p className="text-xl md:text-2xl text-slate-100 mb-8">
+                Empowering students to reach their full potential through
+                personalized tutoring
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 120"
-            className="w-full h-auto text-slate-50"
-            fill="currentColor"
-          >
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" />
-          </svg>
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg
+              viewBox="0 0 1440 120"
+              className="w-full h-auto text-slate-50"
+              fill="currentColor"
+            >
+              <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" />
+            </svg>
+          </div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-20">
-        <div className="container mx-auto px-4">
+      <section className="py-20">
+        <div className="max-w-310 mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
@@ -99,7 +101,7 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-slate-50 py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-310 mx-auto px-4">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
@@ -171,8 +173,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-20">
-        <div className="container mx-auto px-4">
+      <section className="py-20">
+        <div className="max-w-310 mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-800 mb-4">
               Our Core Values

@@ -6,7 +6,7 @@ const PageTitle = ({ title, subText }: { title: string; subText: string }) => {
       className="text-white bg-cover bg-no-repeat"
       style={{ backgroundImage: `url(${titleBg.src})` }}
     >
-      <div className="container mx-auto px-4 py-16">
+      <div className="max-w-310 mx-auto px-4 py-16">
         <h1 className="text-5xl md:text-6xl font-bold mb-4">
           {title ? title : ""}
         </h1>

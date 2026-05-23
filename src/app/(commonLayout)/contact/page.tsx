@@ -18,30 +18,32 @@ export default function ContactPage() {
         className="relative overflow-hidden  text-white bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(${titleBg.src})` }}
       >
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative container mx-auto px-4 py-20 md:py-28">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Get in Touch
-            </h1>
-            <p className="text-xl text-slate-50">
-              We'd love to hear from you. Send us a message and we'll respond
-              within 24 hours.
-            </p>
+        <div className="max-w-310 mx-auto">
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="relative container mx-auto px-4 py-20 md:py-28">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Get in Touch
+              </h1>
+              <p className="text-xl text-slate-50">
+                We'd love to hear from you. Send us a message and we'll respond
+                within 24 hours.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 120"
-            className="w-full h-auto text-slate-50"
-            fill="currentColor"
-          >
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" />
-          </svg>
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg
+              viewBox="0 0 1440 120"
+              className="w-full h-auto text-slate-50"
+              fill="currentColor"
+            >
+              <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" />
+            </svg>
+          </div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 mt-10 relative z-10">
+      <section className="max-w-310 mx-auto px-4 mt-10 relative z-10">
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
             <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -72,7 +74,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-20">
+      <section className="max-w-310 mx-auto px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
@@ -224,7 +226,7 @@ export default function ContactPage() {
       </section>
 
       <section className="bg-slate-50 py-16">
-        <div className="container mx-auto px-4">
+        <div className="max-w-310 mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">
