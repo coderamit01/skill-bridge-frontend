@@ -32,7 +32,7 @@ export function Footer() {
   ];
   return (
     <footer className="bg-brand text-slate-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-10">
+      <div className="container mx-auto px-4 pt-20 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div>
             <h3 className="text-2xl font-bold text-slate-50 mb-4 flex items-center gap-2">

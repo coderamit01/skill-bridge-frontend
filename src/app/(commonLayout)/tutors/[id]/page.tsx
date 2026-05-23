@@ -10,18 +10,18 @@ import ReviewForm from "@/components/public/ReviewForm";
 import { getBookings } from "@/services/bookings.service";
 import { IBooking } from "@/types/booking.types";
 
-
 interface TutorDetailsPageParams {
   params: Promise<{ id: string }>;
 }
 const TutorDetailsPage = async ({ params }: TutorDetailsPageParams) => {
-
   const { id } = await params;
-  const tutorData = await getTutorByID(id);
-  const tutor: ITutorDetails = tutorData?.data;
-  const { data: userData } = await getMe();
-  const { data: bookings }: { data: IBooking[] } = await getBookings();
+  const tutorRes = await getTutorByID(id);
+  const bookingRes = await getBookings();
+  const userRes = await getMe();
 
+  const tutor: ITutorDetails = tutorRes?.data ?? null;
+  const bookings: IBooking[] = bookingRes?.data ?? null;
+  const userData = userRes?.data;
 
   if (!tutor) {
     return (
@@ -52,12 +52,11 @@ const TutorDetailsPage = async ({ params }: TutorDetailsPageParams) => {
 
   const totalReview = reviews.length;
 
-
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <PageTitle title={name} subText="" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
+      <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-3xl overflow-hidden">
@@ -78,7 +77,9 @@ const TutorDetailsPage = async ({ params }: TutorDetailsPageParams) => {
                           <p className="font-bold text-gray-900">
                             {averageRating}
                           </p>
-                          <p className="text-xs text-gray-500">{reviews ? totalReview : ""} reviews</p>
+                          <p className="text-xs text-gray-500">
+                            {reviews ? totalReview : ""} reviews
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -128,7 +129,6 @@ const TutorDetailsPage = async ({ params }: TutorDetailsPageParams) => {
       </div>
     </div>
   );
-}
-
+};
 
 export default TutorDetailsPage;

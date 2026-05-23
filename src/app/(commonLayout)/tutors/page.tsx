@@ -20,7 +20,7 @@ export default async function TutorsPage() {
         title="Find your tutor"
         subText="Find the perfect tutor for your learning goals"
       />
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
+      <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 lg:col-span-3">
             <TutorSidebar categories={categories} />

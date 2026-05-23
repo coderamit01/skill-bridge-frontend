@@ -1,14 +1,19 @@
-"use client"
+"use client";
 import { createReview } from "@/actions/reviewAction";
-import { BookingStatus, IBooking } from "@/types/booking.types"
+import { BookingStatus, IBooking } from "@/types/booking.types";
 import { IUser } from "@/types/user.types";
 import { Star } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-
-const ReviewForm = ({ bookings, user }: { bookings: IBooking[], user: IUser }) => {
+const ReviewForm = ({
+  bookings,
+  user,
+}: {
+  bookings: IBooking[];
+  user: IUser;
+}) => {
   const [rating, setRating] = useState(0);
   const [hovered, setHovered] = useState(0);
   const [comment, setComment] = useState("");
@@ -16,13 +21,12 @@ const ReviewForm = ({ bookings, user }: { bookings: IBooking[], user: IUser }) =
   const router = useRouter();
   const { id } = useParams();
 
-
   const reviewableBooking = bookings?.find(
     (booking) =>
       booking.studentId === user.id &&
       booking.tutorId === id &&
       booking.status === BookingStatus.COMPLETED &&
-      !booking.review
+      !booking.review,
   );
 
   if (!reviewableBooking) return null;
@@ -43,7 +47,11 @@ const ReviewForm = ({ bookings, user }: { bookings: IBooking[], user: IUser }) =
       return;
     }
 
-    const result = await createReview({ bookingId: reviewableBooking.id, rating, comment });
+    const result = await createReview({
+      bookingId: reviewableBooking.id,
+      rating,
+      comment,
+    });
     if (result?.success) {
       toast.success("Review submitted!", { position: "top-right" });
       setRating(0);
@@ -54,7 +62,7 @@ const ReviewForm = ({ bookings, user }: { bookings: IBooking[], user: IUser }) =
         position: "top-right",
       });
     }
-  }
+  };
   return (
     <div className="bg-gray-50 rounded-xl p-4 space-y-3 border border-dashed border-gray-200">
       <p className="font-semibold text-gray-800 text-sm">Leave a Review</p>
@@ -64,10 +72,11 @@ const ReviewForm = ({ bookings, user }: { bookings: IBooking[], user: IUser }) =
           <Star
             key={star}
             size={24}
-            className={`cursor-pointer transition-colors ${star <= (hovered || rating)
-              ? "text-yellow-400 fill-yellow-400"
-              : "text-gray-300"
-              }`}
+            className={`cursor-pointer transition-colors ${
+              star <= (hovered || rating)
+                ? "text-yellow-400 fill-yellow-400"
+                : "text-gray-300"
+            }`}
             onMouseEnter={() => setHovered(star)}
             onMouseLeave={() => setHovered(0)}
             onClick={() => setRating(star)}
@@ -95,7 +104,7 @@ const ReviewForm = ({ bookings, user }: { bookings: IBooking[], user: IUser }) =
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ReviewForm
+export default ReviewForm;

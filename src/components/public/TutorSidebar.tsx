@@ -6,7 +6,7 @@ import { Label } from "../ui/label";
 
 const TutorSidebar = ({ categories }: { categories: Category[] }) => {
   return (
-    <aside className="hidden lg:block w-64">
+    <aside className="hidden lg:block">
       <div className="sticky top-24 bg-white rounded-2xl border border-gray-200 p-6 space-y-6">
         <div>
           <h3 className="font-semibold text-gray-900 mb-4">Subject</h3>
