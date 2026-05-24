@@ -289,29 +289,6 @@ h6 {
     @apply relative bg-white border border-line rounded-2.5xl p-7 cursor-pointer overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg-soft hover:border-transparent;
   }
 
-  .cat-card::after {
-    content: "→";
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    width: 32px;
-    height: 32px;
-    border-radius: 9999px;
-    display: grid;
-    place-items: center;
-    background: #effaf7;
-    color: #207a6e;
-    font-size: 14px;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity .2s, transform .2s;
-  }
-
-  .cat-card:hover::after {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
   .cat-card .ico {
     @apply transition-transform duration-300;
   }
