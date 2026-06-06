@@ -286,7 +286,7 @@ h6 {
   }
 
   .cat-card {
-    @apply relative bg-white border border-line rounded-2.5xl p-7 cursor-pointer overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg-soft hover:border-transparent;
+    @apply relative bg-white border border-line rounded-2.5xl p-7 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg-soft hover:border-transparent;
   }
 
   .cat-card .ico {
@@ -303,24 +303,14 @@ h6 {
   }
 
   .tutor-card .book-btn {
-    @apply text-[13px] font-semibold px-3.5 py-2.5 rounded-full bg-ink text-white transition-colors;
+    @apply text-[13px] font-semibold px-3.5 py-2.5 rounded-full bg-brand text-white transition-colors;
   }
 
   .tutor-card:hover .book-btn {
-    @apply bg-brand-500;
+    @apply bg-brand-dark;
   }
 
-  .steps-connector::before {
-    content: "";
-    position: absolute;
-    top: 56px;
-    left: 16%;
-    right: 16%;
-    height: 1px;
-    background-image: linear-gradient(to right, #8fd9cc 50%, transparent 50%);
-    background-size: 14px 1px;
-    z-index: 0;
-  }
+
 
   .test-bg {
     background: linear-gradient(180deg, #fafbfa 0%, #effaf7 100%);
@@ -387,4 +377,5 @@ h6 {
   .t-photo-4 {
     background: linear-gradient(160deg, #ffe5a8 0%, #d99a4e 60%, #8e6230 100%);
   }
+
 }

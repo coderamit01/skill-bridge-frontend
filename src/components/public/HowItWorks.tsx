@@ -35,10 +35,9 @@ export function HowItWorks() {
   return (
     <section id="how" className="section">
       <div className="max-w-310 mx-auto px-4 py-15 lg:py-18">
-        <div className="flex flex-col items-center text-center mb-14">
-          <span className="eyebrow"><span className="dot" />How SkillBridge works</span>
-          <h2 className="text-[44px] leading-[1.08] mt-4 max-w-[640px]">
-            From browsing to breakthrough in three simple steps.
+        <div className="flex justify-center mb-14">
+          <h2 className="text-[44px] leading-[1.08] mt-4 pb-5 font-semibold text-center">
+            How Skill Bridge <span className="text-brand">Works</span>
           </h2>
         </div>
 
@@ -50,12 +49,9 @@ export function HowItWorks() {
                 style={{ background: s.bg, color: s.color }}
               >
                 <s.Icon width={40} height={40} />
-                <div className="absolute -top-2.5 left-1/2 translate-x-[80px] -translate-y-0 font-display text-[13px] font-bold text-brand-500 bg-white px-2.5 py-1 rounded-full border border-brand-100">
-                  Step {s.n}
-                </div>
               </div>
               <h3 className="font-display font-bold text-[22px] text-ink mb-2.5">{s.title}</h3>
-              <p className="text-[15px] text-muted max-w-[280px] mx-auto">{s.desc}</p>
+              <p className="text-[15px] text-slate-800 max-w-70 mx-auto">{s.desc}</p>
             </div>
           ))}
         </div>
