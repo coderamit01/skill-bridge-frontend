@@ -27,7 +27,7 @@ export function Navbar() {
   };
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-md">
-      <div className="container mx-auto px-4">
+      <div className="max-w-310 mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <h2 className="text-2xl font-semibold">
             <Link href="/" className="flex items-center gap-2 group">
