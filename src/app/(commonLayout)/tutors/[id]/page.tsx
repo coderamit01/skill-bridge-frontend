@@ -20,7 +20,7 @@ const TutorDetailsPage = async ({ params }: TutorDetailsPageParams) => {
   const userRes = await getMe();
 
   const tutor: ITutorDetails = tutorRes?.data ?? null;
-  const bookings: IBooking[] = bookingRes?.data ?? null;
+  const bookings: IBooking[] = bookingRes?.data ?? [];
   const userData = userRes?.data;
 
   if (!tutor) {

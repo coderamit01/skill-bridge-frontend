@@ -12,9 +12,9 @@ export default async function Home() {
   const TutorRes = await getAllTutors();
   const ReviewRes = await getAllReview();
 
-  const categories = categoryRes?.data ?? null;
-  const tutors = TutorRes?.data.tutors ?? null;
-  const reviews = ReviewRes?.data ?? null;
+  const categories = categoryRes?.data ?? [];
+  const tutors = TutorRes?.data.tutors ?? [];
+  const reviews = ReviewRes?.data ?? [];
 
   const topTutors = (tutors ?? [])
     .sort(

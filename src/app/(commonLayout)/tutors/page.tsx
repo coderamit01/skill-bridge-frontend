@@ -6,6 +6,7 @@ import { ITutorDetails } from "@/types/tutor.types";
 import SearchTutor from "@/components/public/SearchTutor";
 import { getAllCategory } from "@/services/category.service";
 import { Category } from "@/types/category.types";
+import { Env } from "@/env";
 
 interface SearchParams {
   category?: string;
@@ -20,7 +21,8 @@ export default async function TutorsPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-  const { category, minPrice, maxPrice, minRating, search } = await searchParams;
+  const { category, minPrice, maxPrice, minRating, search } =
+    await searchParams;
   const filters = {
     category,
     search,
@@ -31,6 +33,8 @@ export default async function TutorsPage({
 
   const data = await getAllTutors(filters);
   const tutors: ITutorDetails[] = data?.data?.tutors || [];
+  console.log(tutors);
+  console.log(Env.runtimeEnv.NEXT_PUBLIC_API_URL);
 
   const categoryData = await getAllCategory();
   const categories: Category[] = categoryData?.data || [];
@@ -50,7 +54,7 @@ export default async function TutorsPage({
                 category,
                 minPrice,
                 maxPrice,
-                minRating
+                minRating,
               }}
             />
           </div>
