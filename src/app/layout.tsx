@@ -1,4 +1,4 @@
-import "./globals.css"
+import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/providers/ThemeProvider";
@@ -16,9 +16,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Skill Bridge | Tutoring Platform",
-  description: "An Online Education Platform",
+  title: "Skill Bridge | Tutoring Made Personal",
+  description:
+    "Skill Bridge connects students with vetted tutors for personalized, on-demand lessons. Book sessions, track progress, and reach learning goals faster",
 };
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,
@@ -36,10 +38,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-        <QueryProvider>
-          {children}
-        </QueryProvider>
-        <Toaster />
+          <QueryProvider>{children}</QueryProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
