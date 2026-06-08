@@ -40,7 +40,6 @@ export const TutorSignUpForm = () => {
     onSubmit: async ({ value }) => {
       try {
         const result = await createTtutor(value);
-        console.log(result);
         if (result?.success) {
           toast.success("Tutor created successfully!", { position: "top-right" });
         } else {

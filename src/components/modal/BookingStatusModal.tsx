@@ -20,7 +20,7 @@ import { BookingStatus } from "@/types/booking.types";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useState, useTransition } from "react";
-import { updateBookingStatus } from "@/actions/bookingAction";
+import { updateBookingStatus } from "@/actions/booking.action";
 import { Role } from "@/types/user.types";
 
 export const BookingStatusModal = ({

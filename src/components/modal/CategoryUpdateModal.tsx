@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Category } from "@/types/category.types";
 import { useState, useTransition } from "react";
-import { updateCategory } from "@/actions/categoryAction";
+import { updateCategory } from "@/actions/category.action";
 
 const CategoryUpdateModal = ({
   isOpen,

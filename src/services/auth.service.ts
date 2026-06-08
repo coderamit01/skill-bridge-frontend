@@ -1,33 +1,6 @@
-import { Env } from "@/env";
 import api from "@/lib/axios"
-import { clientFetch, serverFetch } from "@/lib/fetchApi";
-import { ILoginPayload, IRegisterPayload, IUpdatePayload } from "@/types/user.types";
+import { serverFetch } from "@/lib/fetchApi";
 import { NextRequest } from "next/server";
-
-
-export const userRegister = async (payload: IRegisterPayload) => {
-  try {
-    const data = await clientFetch("/auth/register", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    return data;
-  } catch {
-    return {success: false, message: "Registration failled"};
-  }
-};
-
-export const userLogin = async (payload: ILoginPayload) => {
-  try {
-    const data = await clientFetch(`/auth/login`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    return data;
-  } catch {
-    return {success: false, message: "Login failled"};
-  }
-};
 
 
 export const getUser = async (req: NextRequest) => {
@@ -45,8 +18,6 @@ export const getUser = async (req: NextRequest) => {
     return null;
   }
 }
-
-
 
 export const logOut = async () => {
   const res = await api.post("/auth/logout");

@@ -1,6 +1,6 @@
 "use client"
 
-import { updateUserProfile } from "@/actions/userProfileAction";
+import { updateUserProfile } from "@/actions/userProfile.action";
 import { IUser } from "@/types/user.types";
 import { useForm } from "@tanstack/react-form";
 import { useTransition } from "react";

@@ -1,6 +1,6 @@
 "use client"
 
-import { updateTutor } from "@/actions/TutorProfileAction";
+import { updateTutor } from "@/actions/TutorProfile.action";
 import { IUser, Gender } from "@/types/user.types";
 import { useForm } from "@tanstack/react-form";
 import { useTransition } from "react";

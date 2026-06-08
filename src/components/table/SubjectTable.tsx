@@ -5,7 +5,7 @@ import { Subject } from "@/types/subject.types"
 import { useState } from "react";
 import SubjectUpdateModal from "@/components/modal/SubjectUpdateModal";
 import { Category } from "@/types/category.types";
-import { deleteSubject } from "@/actions/subjectAction";
+import { deleteSubject } from "@/actions/subject.action";
 import { toast } from "sonner";
 
 
@@ -17,19 +17,19 @@ const SubjectTable = ({ subject, categories }: { subject: Subject; categories: C
     setIsOpen(true);
   }
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     try {
-        const result = await deleteSubject(id);
-        if (result?.success) {
-          toast.success("Subject deleted successfully", {
-            position: "top-right",
-          });
-        }
-      } catch (error: any) {
-        toast.error(error.message || "Failed to delete subject", {
+      const result = await deleteSubject(id);
+      if (result?.success) {
+        toast.success("Subject deleted successfully", {
           position: "top-right",
         });
       }
+    } catch (error: any) {
+      toast.error(error.message || "Failed to delete subject", {
+        position: "top-right",
+      });
+    }
   }
 
   return (

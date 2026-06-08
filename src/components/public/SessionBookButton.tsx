@@ -1,6 +1,6 @@
 "use client"
 
-import { createBooking } from "@/actions/bookingAction";
+import { createBooking } from "@/actions/booking.action";
 import { Button } from "@/components/ui/button"
 import { useBookingStore } from "@/store/booking.store";
 import { IUser } from "@/types/user.types";

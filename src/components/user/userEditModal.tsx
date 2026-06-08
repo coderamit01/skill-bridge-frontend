@@ -1,5 +1,5 @@
 "use client";
-import { updateUser } from "@/actions/studentProfileAction";
+import { updateUser } from "@/actions/studentProfile.ction";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

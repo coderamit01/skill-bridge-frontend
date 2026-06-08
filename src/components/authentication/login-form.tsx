@@ -21,8 +21,8 @@ import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { Role } from "@/types/user.types";
-import { userLogin } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
+import { setAuthTokens, userLogin } from "@/actions/auth.action";
 
 const formSchema = z.object({
   email: z.email(),
@@ -45,7 +45,13 @@ export function LoginForm({
     onSubmit: async ({ value }) => {
       try {
         const data = await userLogin(value);
-        console.log(data);
+
+        await setAuthTokens({
+          accessToken: data?.data?.accessToken,
+          refreshToken: data?.data?.refreshToken,
+          sessionToken: data?.data?.token
+        })
+
         const role = data?.data?.user?.role;
         toast.success("Successfully Login", { position: "top-right" });
 

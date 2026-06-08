@@ -1,6 +1,5 @@
 "use client";
 
-import { userRegister } from "@/services/auth.service";
 import { Role } from "@/types/user.types";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
@@ -15,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { userRegister } from "@/actions/auth.action";
 
 const formSchema = z.object({
   name: z.string(),

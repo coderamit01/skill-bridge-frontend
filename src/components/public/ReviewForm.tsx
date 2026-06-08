@@ -1,5 +1,5 @@
 "use client";
-import { createReview } from "@/actions/reviewAction";
+import { createReview } from "@/actions/review.action";
 import { BookingStatus, IBooking } from "@/types/booking.types";
 import { IUser } from "@/types/user.types";
 import { Star } from "lucide-react";

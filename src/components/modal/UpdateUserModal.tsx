@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useForm } from "@tanstack/react-form";
-import { updateUser } from "@/actions/studentProfileAction";
+import { updateUser } from "@/actions/studentProfile.ction";
 import { Textarea } from "../ui/textarea";
 import {
   Select,

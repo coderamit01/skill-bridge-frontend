@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
-import { createSubject } from "@/actions/subjectAction";
+import { createSubject } from "@/actions/subject.action";
 
 const SubjectAddForm = ({ categories }: { categories: Category[] }) => {
   const [value, setValue] = useState<string>("");

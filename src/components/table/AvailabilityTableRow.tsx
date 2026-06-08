@@ -6,7 +6,7 @@ import { SquarePen, Trash2 } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
-import { deleteAvailability } from "@/actions/availabilityAction";
+import { deleteAvailability } from "@/actions/availability.action";
 import { is } from "zod/v4/locales";
 import UpdateAvailabilityModal from "@/components/modal/UpdateAvailabilityModal";
 

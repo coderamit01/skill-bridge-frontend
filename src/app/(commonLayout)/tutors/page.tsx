@@ -33,8 +33,6 @@ export default async function TutorsPage({
 
   const data = await getAllTutors(filters);
   const tutors: ITutorDetails[] = data?.data?.tutors || [];
-  console.log(tutors);
-  console.log(Env.runtimeEnv.NEXT_PUBLIC_API_URL);
 
   const categoryData = await getAllCategory();
   const categories: Category[] = categoryData?.data || [];

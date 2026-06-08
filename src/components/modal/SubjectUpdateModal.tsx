@@ -20,7 +20,7 @@ import {
 import { Subject } from "@/types/subject.types";
 import { toast } from "sonner";
 import { useState, useTransition } from "react";
-import { updateSubject } from "@/actions/subjectAction";
+import { updateSubject } from "@/actions/subject.action";
 import { Category } from "@/types/category.types";
 
 
@@ -39,7 +39,7 @@ const SubjectUpdateModal = ({
 
   const [value, setValue] = useState(subject.category.id);
   const [isPending, startTransition] = useTransition();
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     startTransition(async () => {

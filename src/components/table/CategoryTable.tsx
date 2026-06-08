@@ -2,7 +2,7 @@
 import { Category } from "@/types/category.types";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { SquarePen, Trash2 } from "lucide-react";
-import { deleteCategory } from "@/actions/categoryAction";
+import { deleteCategory } from "@/actions/category.action";
 import { toast } from "sonner";
 import { useState } from "react";
 import CategoryUpdateModal from "@/components/modal/CategoryUpdateModal";

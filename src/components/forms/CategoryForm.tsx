@@ -1,6 +1,6 @@
 "use client";
 
-import { createCategory } from "@/actions/categoryAction";
+import { createCategory } from "@/actions/category.action";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldGroup, FieldLabel } from "@/components/ui/field";

@@ -16,7 +16,7 @@ import { IAvailability } from "@/types/availability.types";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import { updateAvailabilitySchema } from "@/validation/availabilitySchema";
-import { updateAvailability } from "@/actions/availabilityAction";
+import { updateAvailability } from "@/actions/availability.action";
 import { toLocalTimeInput } from "@/utils/localTime";
 
 const UpdateAvailabilityModal = ({
